@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOVA → NAVI Bridge</title><style>
+:root{
+  --bg:#0b1636; --panel:#0f1e44; --ink:#eaf1ff; --sub:#cbe0ff;
+  --edge:rgba(255,255,255,0.14); --accent:#ffd166; --muted:#94a3b8;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:var(--panel);border-bottom:1px solid var(--edge)}
+.brand{font-weight:900;letter-spacing:.3px}
+main{max-width:1100px;margin:24px auto;padding:0 16px}
+.card{background:rgba(255,255,255,0.05);border:1px solid var(--edge);border-radius:14px;padding:16px;margin-bottom:14px}
+.h1{font-size:26px;font-weight:900;margin:0 0 8px}
+.lead{color:var(--sub);margin:0 0 14px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.btn{padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:var(--accent);color:#1a1500;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.link{color:#9fc5ff;text-decoration:underline;cursor:pointer}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.08);border:1px solid var(--edge);font-size:12px;color:var(--sub)}
+.small{font-size:13px;color:var(--sub)}
+.notice{padding:10px 12px;border-left:3px solid var(--accent);background:rgba(255,209,102,0.09);border-radius:8px}
+nav.breadcrumbs{font-size:13px;color:var(--muted);margin-bottom:10px}
+hr.sep{border:0;border-top:1px solid var(--edge);margin:12px 0}
+</style></head>
+<body>
+<header><div class="brand">NOVA → NAVI Bridge</div><a class="link" href="navi-welcome.html">Skip to NAVI</a></header>
+<main>
+  <nav class="breadcrumbs">Bridge · Hand off Nova results to Navi</nav>
+  <div class="card">
+    <div class="h1">Hand off your Nova results</div>
+    <p class="lead">This page simulates the Nova handoff. It stores your selected traits in <code>localStorage</code> so NAVI can use them.</p>
+    <div id="current" class="small">Detecting current traits…</div>
+    <hr class="sep" />
+    <div class="small">Add a few sample traits (for testing):</div>
+    <div id="traits" class="row"></div>
+    <div style="margin-top:12px">
+      <button id="save" class="btn">Save to localStorage</button>
+      <a href="navi-welcome.html" class="btn" style="margin-left:8px">Continue to NAVI</a>
+      <a href="#" id="clear" class="link" style="margin-left:12px">Clear saved traits</a>
+    </div>
+    <p class="small" style="margin-top:10px">In production this page won’t be visible; Nova will hand off automatically.</p>
+  </div>
+</main>
+<script>
+  const SAMPLE = ['Visionary','Analytical','Strategic','Connector','Executor','Storyteller','Client relations'];
+  const grid = document.getElementById('traits');
+  grid.innerHTML = SAMPLE.map(t => `
+    <label class="card" style="padding:10px;display:flex;align-items:center;gap:8px;">
+      <input type="checkbox" value="${t}" style="accent-color:#ffd166">
+      <span>${t}</span>
+    </label>
+  `).join('');
+  function refreshCurrent(){
+    try{ const s = JSON.parse(localStorage.getItem('novaSelectedTraits')||'[]'); 
+      document.getElementById('current').innerHTML = s.length ? 
+        'Saved traits: ' + s.map(x=>'🟡 '+x).join(', ') : 'No traits saved yet.'; 
+    }catch(e){document.getElementById('current').textContent='No traits saved yet.'}
+  }
+  refreshCurrent();
+  document.getElementById('save').onclick = () => {
+    const chosen = Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map(x=>x.value);
+    if(!chosen.length) { alert('Pick at least one sample trait.'); return; }
+    localStorage.setItem('novaSelectedTraits', JSON.stringify(chosen));
+    refreshCurrent();
+  };
+  document.getElementById('clear').onclick = (e) => { e.preventDefault(); localStorage.removeItem('novaSelectedTraits'); refreshCurrent(); };
+</script>
+</body></html>
