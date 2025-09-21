@@ -1,229 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVA – Discover Your Core Traits</title>
-  <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
-  <style>
-    :root { --nova:#0f1e44; --ink:#10131a; --muted:#6b7280; --edge:#e5e7eb; --accent:#ffd166; --card:#ffffff; }
-    * { box-sizing: border-box; }
-    body { margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--ink); background:#0b1636; }
-    a { text-decoration:none; }
-    section { max-width:1024px; margin:32px auto; padding:0 20px; }
-    /* Header */
-    .brand-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; background:var(--nova); color:#fff; border-bottom:1px solid rgba(255,255,255,.08); position:sticky; top:0; z-index:10; }
-    .brand-left { display:flex; align-items:center; gap:12px; }
-    .brand-mark { font-weight:800; letter-spacing:.5px; font-size:22px; }
-    .brand-tagline { opacity:.85; font-size:14px; }
-    /* Hero */
-    .hero { color:#eaf1ff; }
-    .hero-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:28px; }
-    .hero h1 { font-size:44px; line-height:1.1; margin:0 0 10px 0; }
-    .hero p { font-size:18px; color:#cbd5e1; margin:0 0 16px 0; }
-    .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
-    .btn { display:inline-block; padding:12px 18px; border-radius:10px; border:1px solid var(--edge); background:var(--accent); color:#1a1500; font-weight:700; }
-    .btn.secondary { background:transparent; color:#eaf1ff; border-color:rgba(255,255,255,0.2); }
-    /* Traits */
-    .traits-wrap { background:#0f1e44; border:1px solid rgba(255,255,255,0.12); border-radius:16px; color:#eaf1ff; padding:22px; }
-    .traits-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
-    .trait { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:14px; }
-    .trait label { display:flex; gap:10px; align-items:flex-start; cursor:pointer; }
-    .trait input { margin-top:4px; }
-    .muted { color:#cbd5e1; }
-    button, .btn-lite { padding:10px 14px; border-radius:8px; border:1px solid #d1d5db; background:#fff; color:#0f172a; cursor:pointer; }
-    .btn-lite:hover { background:#f5f5f5; }
-    /* Results */
-    #results-card { background:var(--card); border:1px solid var(--edge); border-radius:12px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,.06); }
-    .pill { display:inline-block; margin:6px; padding:8px 12px; border-radius:999px; border:1px solid var(--edge); background:#fafafa; font-weight:600; }
-    /* Plans */
-    .plans { display:flex; justify-content:space-around; flex-wrap:wrap; margin-top:20px; }
-    .plan { flex:1; min-width:200px; text-align:center; margin:10px; padding:15px; background:#fff; border:1px solid #ddd; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.05); }
-    .plan h4 { margin:8px 0; }
-    .plan p { font-weight:bold; margin:6px 0 12px; color:#333; }
-    /* Bridge note */
-    .bridge-note { max-width:1024px; margin:18px auto 28px; padding:12px 14px; font-size:13px; line-height:1.4; color:#4a3b14; background:#fff8e6; border:1px solid #f1d48a; border-radius:8px; }
-    @media print {
-      .no-print { display:none !important; }
-      body { background:#fff; }
-      #results-card { box-shadow:none; border:none; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOVA – Discover Your Core Traits</title>
+<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+<style>
+:root{--nova:#0f1e44;--ink:#10131a;--muted:#6b7280;--edge:#e5e7eb;--accent:#ffd166;--card:#ffffff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#0b1636}
+a{color:inherit;text-decoration:none}section{max-width:1024px;margin:32px auto;padding:0 20px}
+.brand-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--nova);color:#fff;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:10}
+.brand-left{display:flex;align-items:center;gap:12px}.brand-mark{font-weight:800;letter-spacing:.5px;font-size:22px}.brand-tagline{opacity:.85;font-size:14px}
+.hero{color:#eaf1ff}.hero-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px}.hero h1{font-size:44px;line-height:1.1;margin:0 0 10px 0}.hero p{font-size:18px;color:#cbd5e1;margin:0 0 16px 0}.cta-row{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-block;padding:12px 18px;border-radius:10px;border:1px solid var(--edge);background:var(--accent);color:#1a1500;font-weight:700}.btn.secondary{background:transparent;color:#eaf1ff;border-color:rgba(255,255,255,0.2)}
+.traits-wrap{background:#0f1e44;border:1px solid rgba(255,255,255,0.12);border-radius:16px;color:#eaf1ff;padding:22px}.traits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.trait{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px}.trait label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.trait input{margin-top:4px}.muted{color:#cbd5e1}.btn-lite{padding:10px 14px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:#0f172a;cursor:pointer}.btn-lite:hover{background:#f5f5f5}
+#results-card{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:24px;box-shadow:0 10px 24px rgba(0,0,0,.06)}.pill{display:inline-block;margin:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--edge);background:#fafafa;font-weight:600}.plans{display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:20px}.plan{flex:1;min-width:200px;text-align:center;margin:10px;padding:15px;background:#fff;border:1px solid #ddd;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.05)}.plan h4{margin:8px 0}.plan p{font-weight:bold;margin:6px 0 12px;color:#333}.bridge-note{max-width:1024px;margin:18px auto 28px;padding:12px 14px;font-size:13px;line-height:1.4;color:#4a3b14;background:#fff8e6;border:1px solid #f1d48a;border-radius:8px}
+@media print{.no-print{display:none !important}body{background:#fff}#results-card{box-shadow:none;border:none}}
+</style>
 </head>
 <body>
-
-  <!-- NOVA-only header -->
-  <header class="brand-header">
-    <div class="brand-left">
-      <span class="brand-mark">NOVA</span>
-      <span class="brand-tagline">Discover your core traits</span>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-card">
-      <h1>Discover Your Purpose.</h1>
-      <p>Nova helps you reveal your core traits and strengths. Free results first—no membership required.</p>
-      <div class="cta-row">
-        <a class="btn" href="#traits-screen">Start with Nova</a>
-        <a class="btn secondary" href="navi.html">Learn about Navi</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="hero">
-    <div class="hero-card">
-      <h2>Three simple steps</h2>
-      <ul style="color:#cbd5e1; line-height:1.7;">
-        <li><b>Discover:</b> Select <b>5 or more</b> traits that fit you best in NOVA.</li>
-        <li><b>Report:</b> See your results instantly in NOVA (and print/save if you like).</li>
-        <li><b>Path:</b> When you’re ready, continue into NAVI with a membership.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- TRAITS (anchor target) -->
-  <section id="traits-screen">
-    <div class="traits-wrap">
-      <h2>Select your traits</h2>
-      <p class="muted">Select <b>5 or more</b> traits that fit you best. You can refine any time.</p>
-
-      <form id="traits-form">
-        <div class="traits-grid">
-          <!-- Demo traits; extend to your full 50 -->
-          <div class="trait"><label><input type="checkbox" name="trait" value="Visionary"> <div><b>Visionary</b><div>Sees future possibilities quickly.</div></div></label></div>
-          <div class="trait"><label><input type="checkbox" name="trait" value="Analytical"> <div><b>Analytical</b><div>Breaks problems down and validates with data.</div></div></label></div>
-          <div class="trait"><label><input type="checkbox" name="trait" value="Strategic"> <div><b>Strategic</b><div>Finds leverage points that move the whole system.</div></div></label></div>
-          <div class="trait"><label><input type="checkbox" name="trait" value="Communicator"> <div><b>Communicator</b><div>Explains complex ideas clearly and persuasively.</div></div></label></div>
-          <div class="trait"><label><input type="checkbox" name="trait" value="Leadership"> <div><b>Leadership</b><div>Mobilizes people and delivers outcomes.</div></div></label></div>
-          <div class="trait"><label><input type="checkbox" name="trait" value="Creative"> <div><b>Creative</b><div>Generates fresh, useful solutions.</div></div></label></div>
-        </div>
-
-        <div style="margin-top:16px">
-          <button type="submit" class="btn-lite" id="generate-btn">Generate My Report</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- RESULTS -->
-  <section id="results-screen" hidden>
-    <div id="results-card">
-      <h2>Your NOVA Results</h2>
-      <div class="no-print" style="margin:8px 0 16px;">
-        <button id="back-btn" class="btn-lite">← Edit Traits</button>
-        <button id="print-btn" class="btn-lite">Print / Save PDF</button>
-      </div>
-      <h3 id="result-headline"></h3>
-      <p id="result-summary"></p>
-      <div id="top-traits"></div>
-      <div id="clusters"></div>
-      <div id="recommendations"></div>
-    </div>
-
-    <!-- Membership CTA -->
-    <section class="no-print" style="text-align:center; margin-top:24px;">
-      <h2>Continue your journey with NAVI</h2>
-      <p style="color:#555; margin-top:-8px;">Choose a membership to activate resume rewrites, job filters, and more.</p>
-      <div class="plans">
-        <div class="plan">
-          <h4>NAVI Starter Plan</h4>
-          <p>$29.99 / month</p>
-          <a href="https://payhip.com/b/GdfU7" class="payhip-buy-button" data-theme="green" data-product="GdfU7">Buy Now</a>
-        </div>
-        <div class="plan">
-          <h4>NAVI PRO Plan</h4>
-          <p>$99 / month</p>
-          <a href="https://payhip.com/b/knC1Z" class="payhip-buy-button" data-theme="green" data-product="knC1Z">Buy Now</a>
-        </div>
-        <div class="plan">
-          <h4>NAVI Pro Suite Plan</h4>
-          <p>$149 / month</p>
-          <a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy Now</a>
-        </div>
-        <div class="plan">
-          <h4>How to Know Your Purpose</h4>
-          <p>Free / Paid Download</p>
-          <a href="https://payhip.com/b/N7Lvg" class="payhip-buy-button" data-theme="green" data-product="N7Lvg">Buy Now</a>
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <!-- Bridge note -->
-  <footer class="bridge-note no-print">
-    You’re currently in <b>NOVA</b> (free results). To apply your results with advanced tools like resume rewrites and job filters, continue in <b>NAVI</b> (paid membership).
-  </footer>
-
+<header class="brand-header"><div class="brand-left"><span class="brand-mark">NOVA</span><span class="brand-tagline">Discover your core traits</span></div></header>
+<section class="hero"><div class="hero-card"><h1>Discover Your Purpose.</h1><p>Nova helps you reveal your core traits and strengths. Free results first—no membership required.</p><div class="cta-row"><a class="btn" href="#traits-screen">Start with Nova</a><a class="btn secondary" href="navi.html">Learn about Navi</a></div></div></section>
+<section class="hero"><div class="hero-card"><h2>Three simple steps</h2><ul style="color:#cbd5e1;line-height:1.7"><li><b>Discover:</b> Select <b>5 or more</b> traits that fit you best in NOVA.</li><li><b>Report:</b> See your results instantly in NOVA (and print/save if you like).</li><li><b>Path:</b> When you’re ready, continue into NAVI with a membership.</li></ul></div></section>
+<section id="traits-screen"><div class="traits-wrap"><h2>Select your traits</h2><p class="muted">Select <b>5 or more</b> traits that fit you best. You can refine any time.</p><form id="traits-form"><div class="traits-grid">
+<div class="trait"><label><input type="checkbox" name="trait" value="Visionary"> <div><b>Visionary</b><div>Sees future possibilities and patterns quickly.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Analytical"> <div><b>Analytical</b><div>Breaks problems down and validates with data.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Strategic"> <div><b>Strategic</b><div>Finds leverage points that move the whole system.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Communicator"> <div><b>Communicator</b><div>Explains complex ideas clearly and persuasively.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Leadership"> <div><b>Leadership</b><div>Mobilizes people and delivers outcomes.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Creative"> <div><b>Creative</b><div>Generates fresh, useful solutions.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Empathetic"> <div><b>Empathetic</b><div>Reads others' emotions and responds with care.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Detail-oriented"> <div><b>Detail-oriented</b><div>Notices small facts that improve quality.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Resilient"> <div><b>Resilient</b><div>Bounces back and perseveres through setbacks.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Adaptable"> <div><b>Adaptable</b><div>Shifts approaches quickly as conditions change.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Collaborative"> <div><b>Collaborative</b><div>Works well in teams and integrates perspectives.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Independent"> <div><b>Independent</b><div>Drives work autonomously with minimal direction.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Curious"> <div><b>Curious</b><div>Asks questions and explores new ideas.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Driven"> <div><b>Driven</b><div>Sets ambitious goals and pursues them relentlessly.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Organized"> <div><b>Organized</b><div>Structures work and keeps things on track.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Persuasive"> <div><b>Persuasive</b><div>Influences others and gains buy-in.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Tech-savvy"> <div><b>Tech-savvy</b><div>Learns and uses technical tools effectively.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Customer-focused"> <div><b>Customer-focused</b><div>Designs for user needs and satisfaction.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Ethical"> <div><b>Ethical</b><div>Acts with integrity and strong principles.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Results-oriented"> <div><b>Results-oriented</b><div>Prioritizes measurable outcomes and impact.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Systems-thinker"> <div><b>Systems-thinker</b><div>Understands interdependent parts and dynamics.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Risk-taker"> <div><b>Risk-taker</b><div>Comfortable making decisions under uncertainty.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Intuitive"> <div><b>Intuitive</b><div>Makes fast, sensible judgments from experience.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Negotiator"> <div><b>Negotiator</b><div>Finds mutual wins and closes agreements.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Mentoring"> <div><b>Mentoring</b><div>Coaches others to grow and succeed.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Process-oriented"> <div><b>Process-oriented</b><div>Defines repeatable, efficient processes.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Quick-learner"> <div><b>Quick-learner</b><div>Picks up new skills and knowledge rapidly.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Planner"> <div><b>Planner</b><div>Creates clear plans and timelines.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Resourceful"> <div><b>Resourceful</b><div>Finds ways to get things done with limited resources.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Patient"> <div><b>Patient</b><div>Stays calm and persistent over time.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Decisive"> <div><b>Decisive</b><div>Makes timely choices and moves forward.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Innovative"> <div><b>Innovative</b><div>Regularly introduces new approaches.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Data-driven"> <div><b>Data-driven</b><div>Uses metrics to guide decisions.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Visual-thinker"> <div><b>Visual-thinker</b><div>Uses imagery and diagrams to reason.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Storyteller"> <div><b>Storyteller</b><div>Frames ideas into compelling narratives.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Facilitator"> <div><b>Facilitator</b><div>Guides groups to productive outcomes.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Multilingual"> <div><b>Multilingual</b><div>Communicates across languages and cultures.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Coach"> <div><b>Coach</b><div>Builds skills through feedback and practice.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Budgeting"> <div><b>Budgeting</b><div>Manages resources and financial planning.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Networking"> <div><b>Networking</b><div>Builds valuable professional relationships.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="User-centered"> <div><b>User-centered</b><div>Designs solutions focused on people.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Execution-focused"> <div><b>Execution-focused</b><div>Turns plans into delivered results.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Quality-focused"> <div><b>Quality-focused</b><div>Maintains high standards in delivery.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Analytical-research"> <div><b>Analytical-research</b><div>Conducts deep investigation and research.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Process-improvement"> <div><b>Process-improvement</b><div>Continuously improves workflows.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Strategic-vision"> <div><b>Strategic-vision</b><div>Sets long-term direction and strategy.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Client-relations"> <div><b>Client-relations</b><div>Manages client expectations and satisfaction.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Compliance-minded"> <div><b>Compliance-minded</b><div>Ensures policies and standards are followed.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Presentation-skill"> <div><b>Presentation-skill</b><div>Delivers clear, confident presentations.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Emotional-intelligence"> <div><b>Emotional-intelligence</b><div>Regulates emotions and reads social cues.</div></div></label></div>\n
+</div><div style="margin-top:16px"><button type="submit" class="btn-lite" id="generate-btn">Generate My Report</button></div></form></div></section>
+<section id="results-screen" hidden><div id="results-card"><h2>Your NOVA Results</h2><div class="no-print" style="margin:8px 0 16px;"><button id="back-btn" class="btn-lite">← Edit Traits</button><button id="print-btn" class="btn-lite">Print / Save PDF</button></div><h3 id="result-headline"></h3><p id="result-summary"></p><div id="top-traits"></div><div id="clusters"></div><div id="recommendations"></div></div>
+<section class="no-print" style="text-align:center;margin-top:24px;"><h2>Continue your journey with NAVI</h2><p style="color:#555;margin-top:-8px;">Choose a membership to activate resume rewrites, job filters, and more.</p><div class="plans">
+<div class="plan"><h4>NAVI Starter Plan</h4><p>$29.99 / month</p><a href="https://payhip.com/b/GdfU7" class="payhip-buy-button" data-theme="green" data-product="GdfU7">Buy Now</a></div>
+<div class="plan"><h4>NAVI PRO Plan</h4><p>$99 / month</p><a href="https://payhip.com/b/knC1Z" class="payhip-buy-button" data-theme="green" data-product="knC1Z">Buy Now</a></div>
+<div class="plan"><h4>NAVI Pro Suite Plan</h4><p>$149 / month</p><a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy Now</a></div>
+<div class="plan"><h4>How to Know Your Purpose</h4><p>Free / Paid Download</p><a href="https://payhip.com/b/N7Lvg" class="payhip-buy-button" data-theme="green" data-product="N7Lvg">Buy Now</a></div>
+</div></section></section>
+<footer class="bridge-note no-print">You’re currently in <b>NOVA</b> (free results). To apply your results with advanced tools like resume rewrites and job filters, continue in <b>NAVI</b> (paid membership).</footer>
 <script>
-  // Simple example mapping; extend to all 50 traits
-  const traitToCluster = {
-    Visionary: 'Design & Innovation',
-    Analytical: 'Data & Strategy',
-    Strategic: 'Data & Strategy',
-    Communicator: 'People & Operations',
-    Leadership: 'People & Operations',
-    Creative: 'Design & Innovation'
-  };
+const traitToCluster = {
+const traitToCluster = {
+  'Visionary': 'Design & Innovation',
+  'Creative': 'Design & Innovation',
+  'Visual-thinker': 'Design & Innovation',
+  'Storyteller': 'Design & Innovation',
+  'Innovative': 'Design & Innovation',
+  'Analytical': 'Data & Strategy',
+  'Strategic': 'Data & Strategy',
+  'Data-driven': 'Data & Strategy',
+  'Analytical-research': 'Data & Strategy',
+  'Process-improvement': 'Data & Strategy',
+  'Planner': 'Data & Strategy',
+  'Leadership': 'People & Operations',
+  'Communicator': 'People & Operations',
+  'Mentoring': 'People & Operations',
+  'Coach': 'People & Operations',
+  'Facilitator': 'People & Operations',
+  'Client-relations': 'People & Operations',
+  'Networking': 'People & Operations',
+  'Organized': 'Execution & Delivery',
+  'Execution-focused': 'Execution & Delivery',
+  'Quality-focused': 'Execution & Delivery',
+  'Process-oriented': 'Execution & Delivery',
+  'Resourceful': 'Execution & Delivery',
+  'Budgeting': 'Execution & Delivery',
+  'Curious': 'Growth & Curiosity',
+  'Quick-learner': 'Growth & Curiosity',
+  'Driven': 'Growth & Curiosity',
+  'Adaptable': 'Growth & Curiosity',
+  'Resilient': 'Growth & Curiosity',
+  'Risk-taker': 'Growth & Curiosity',
+  'Customer-focused': 'Customer & Product',
+  'User-centered': 'Customer & Product',
+  'Presentation-skill': 'Customer & Product',
+  'Multilingual': 'Customer & Product',
+  'Client-relations': 'Customer & Product',
+};
 
   const clusterBlurbs = {
+    'Design & Innovation': 'You excel in ideation, UX, and creating fresh, valuable solutions.',
     'Data & Strategy': 'You shine when solving complex problems and guiding decisions with evidence.',
-    'Design & Innovation': 'You excel in ideation, user experience, and creating fresh, valuable solutions.',
-    'People & Operations': 'You mobilize teams, set direction, and deliver consistent outcomes.'
+    'People & Operations': 'You mobilize teams, set direction, and deliver consistent outcomes.',
+    'Execution & Delivery': 'You reliably turn work into polished, repeatable outcomes.',
+    'Growth & Curiosity': 'You learn fast and expand capability through experimentation.',
+    'Customer & Product': 'You design with the user in mind and deliver market-fit solutions.'
   };
-
   const recs = {
-    'Data & Strategy': ['Business Intelligence Lead','Process Engineer','Lean Six Sigma Analyst'],
     'Design & Innovation': ['Product Designer','Innovation Manager','Brand Strategist'],
-    'People & Operations': ['Operations Manager','People Lead','Program Director']
+    'Data & Strategy': ['Business Analyst','Data Scientist','Process Engineer'],
+    'People & Operations': ['Operations Manager','People Lead','Program Director'],
+    'Execution & Delivery': ['Project Manager','Program Manager','Implementation Lead'],
+    'Growth & Curiosity': ['Growth PM','Researcher','Strategy Associate'],
+    'Customer & Product': ['Product Manager','Customer Success Lead','UX Researcher']
   };
-
   const form = document.getElementById('traits-form');
   const traitsScreen = document.getElementById('traits-screen');
   const resultsScreen = document.getElementById('results-screen');
-
   const headlineEl = document.getElementById('result-headline');
   const summaryEl = document.getElementById('result-summary');
   const topTraitsEl = document.getElementById('top-traits');
   const clustersEl = document.getElementById('clusters');
   const recommendationsEl = document.getElementById('recommendations');
-
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const selected = Array.from(form.querySelectorAll('input[name="trait"]:checked')).map(i => i.value);
     if (selected.length < 5) { alert('Please select 5 or more traits to generate your report.'); return; }
-
-    // Score clusters
     const clusterScores = {};
     selected.forEach(tr => {
-      const c = traitToCluster[tr] || 'General';
+      const c = traitToCluster[tr] || 'Other';
       clusterScores[c] = (clusterScores[c] || 0) + 1;
     });
-
-    // Show results
     traitsScreen.hidden = true;
     resultsScreen.hidden = false;
     window.scrollTo({ top: document.getElementById('results-screen').offsetTop - 20, behavior: 'smooth' });
-
-    headlineEl.textContent = 'Here’s what your traits reveal:';
+    headlineEl.textContent = 'Here\'s what your traits reveal:';
     summaryEl.textContent = `You selected ${selected.length} core traits.`;
-
     topTraitsEl.innerHTML = '<h4>Your Top Traits:</h4>' + selected.map(tr => `<span class="pill">${tr}</span>`).join('');
-
     const ranked = Object.entries(clusterScores).sort((a,b) => b[1]-a[1]);
-    clustersEl.innerHTML = '<h4>Your Strength Clusters:</h4>' +
-      ranked.map(([c,score]) => `<p><b>${c}</b> (${score}) – ${clusterBlurbs[c] || ''}</p>`).join('');
-
+    clustersEl.innerHTML = '<h4>Your Strength Clusters:</h4>' + ranked.map(([c,score]) => `<p><b>${c}</b> (${score}) – ${clusterBlurbs[c] || ''}</p>`).join('');
     const seen = new Set();
-    recommendationsEl.innerHTML = '<h4>Suggested Roles:</h4>' +
-      ranked.map(([c]) => {
-        const list = (recs[c] || []).filter(r => !seen.has(r) && seen.add(r));
-        return list.length ? `<ul>${list.map(r => `<li>${r}</li>`).join('')}</ul>` : '';
-      }).join('');
+    recommendationsEl.innerHTML = '<h4>Suggested Roles:</h4>' + ranked.map(([c]) => {
+      const list = (recs[c] || []).filter(r => !seen.has(r) && seen.add(r));
+      return list.length ? `<ul>${list.map(r => `<li>${r}</li>`).join('')}</ul>` : '';
+    }).join('');
   });
-
   document.getElementById('back-btn')?.addEventListener('click', () => {
     resultsScreen.hidden = true;
     traitsScreen.hidden = false;
@@ -231,6 +126,5 @@
   });
   document.getElementById('print-btn')?.addEventListener('click', () => window.print());
 </script>
-
 </body>
 </html>
