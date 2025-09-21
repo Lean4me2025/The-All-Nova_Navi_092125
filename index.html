@@ -85,7 +85,7 @@
   document.getElementById('beginAgain')?.addEventListener('click', (e) => {
     e.preventDefault();
     try { localStorage.clear(); } catch(e) {}
-    window.location.href = 'welcome.html';
+    window.location.replace('welcome.html?reset=1&ts=' + Date.now());
   });
 
   // Force fresh state if coming from Welcome with ?fresh=1
@@ -192,6 +192,22 @@
 
   // Call on load
   document.addEventListener('DOMContentLoaded', renderTraits);
+
+  // Robust fresh-start guard
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('start') || params.has('reset')) {
+      try {
+        localStorage.removeItem('novaSelectedTraits');
+        localStorage.removeItem('naviPath');
+        sessionStorage.clear();
+      } catch(e) {}
+      setTimeout(() => {
+        document.querySelectorAll('input[name="trait"]').forEach(cb => { cb.checked = false; });
+      }, 0);
+    }
+  })();
+
 </script>
 </body>
 </html>
