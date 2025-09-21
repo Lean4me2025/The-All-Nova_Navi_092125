@@ -14,10 +14,10 @@
     * { box-sizing: border-box; }
     body { margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--ink); background:#0b1636; }
     a { text-decoration:none; }
-    section { max-width:1024px; margin:32px auto; padding:0 20px; }
+    section { max-width:1024px; margin:20px auto; padding:0 16px; }
 
     .brand-header { display:flex; align-items:center; justify-content:space-between;
-      padding:14px 20px; background:var(--nova); color:#fff; border-bottom:1px solid rgba(255,255,255,.08);
+      padding:10px 16px; background:var(--nova); color:#fff; border-bottom:1px solid rgba(255,255,255,.08);
       position:sticky; top:0; z-index:10; }
     .brand-left { display:flex; align-items:center; gap:12px; }
     .brand-mark { font-weight:800; letter-spacing:.5px; font-size:22px; }
@@ -25,15 +25,15 @@
 
     .hero { color:#eaf1ff; }
     .hero-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
-      border-radius:16px; padding:28px; }
-    .hero h1 { font-size:44px; line-height:1.1; margin:0 0 10px 0; }
-    .hero p { font-size:18px; color:#cbd5e1; margin:0 0 16px 0; }
-    .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
-    .btn { display:inline-block; padding:12px 18px; border-radius:10px; border:1px solid var(--edge);
+      border-radius:14px; padding:14px; }
+    .hero h1 { font-size:38px; line-height:1.1; margin:0 0 6px 0; }
+    .hero p { font-size:16px; color:#cbd5e1; margin:0 0 10px 0; }
+    .cta-row { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:10px 14px; border-radius:10px; border:1px solid var(--edge);
       background:var(--accent); color:#1a1500; font-weight:700; }
     .btn.secondary { background:transparent; color:#eaf1ff; border-color:rgba(255,255,255,0.2); }
 
-    .traits-wrap { background:#0f1e44; border:1px solid rgba(255,255,255,0.12); border-radius:16px; color:#eaf1ff; padding:22px; }
+    .traits-wrap { background:#0f1e44; border:1px solid rgba(255,255,255,0.12); border-radius:16px; color:#eaf1ff; padding:16px; }
     .traits-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
     .trait-check { position:absolute; opacity:0; pointer-events:none; }
     .trait-card { display:block; background:var(--cardBg); border:1px solid var(--cardStroke); border-radius:12px;
@@ -90,11 +90,11 @@
   <section class="hero">
     <div class="hero-card">
       <h2>Three simple steps</h2>
-      <ul style="color:#cbd5e1; line-height:1.7;">
-        <li><b>Discover:</b> Select <b>5 or more</b> traits that fit you best in NOVA.</li>
-        <li><b>Report:</b> See your results instantly in NOVA (and print/save if you like).</li>
-        <li><b>Path:</b> When you’re ready, continue into NAVI with a membership.</li>
-      </ul>
+      <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; color:#cbd5e1;">
+        <div style="flex:1; min-width:200px;"><b>1) Discover</b><br/>Select 5+ traits in NOVA.</div>
+        <div style="flex:1; min-width:200px;"><b>2) Report</b><br/>See results instantly (print/save).</div>
+        <div style="flex:1; min-width:200px;"><b>3) Path</b><br/>Continue in NAVI with membership.</div>
+      </div>
     </div>
   </section>
 
