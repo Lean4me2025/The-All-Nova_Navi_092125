@@ -21,6 +21,18 @@
 .card-face.selected { outline:2px solid #ffd166; background:rgba(255,209,102,0.08); }
 .trait-title { font-weight:700; margin-bottom:6px; color:#fff; }
 .trait-desc { color:#cbe0ff; font-size:14px; }
+
+.traits-header { display:flex !important; align-items:center !important; justify-content:space-between !important; gap:12px !important; }
+.cta-top { padding:10px 14px; border-radius:10px; border:1px solid #e5e7eb; background:#ffd166; color:#1a1500; font-weight:700; cursor:pointer; }
+.traits-grid { display:grid !important; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important; gap:16px !important; margin-top:14px !important; }
+.trait-card { display:block; cursor:pointer; }
+.trait-card input { display:none; }
+.card-face { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px; transition:all .15s ease; }
+.card-face.selected { outline:2px solid #ffd166; background:rgba(255,209,102,0.08); }
+.trait-title { font-weight:700; margin-bottom:6px; color:#fff; }
+.trait-desc { color:#cbe0ff; font-size:14px; }
+.cta-bottom { padding:10px 14px; border-radius:10px; border:1px solid #e5e7eb; background:#ffd166; color:#1a1500; font-weight:700; cursor:pointer; margin-top:12px; }
+
 </style>
 </head>
 <body>
@@ -31,8 +43,10 @@
   </div>
 
   <header>
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;"><h2 style="margin:0;">Select your traits</h2>
-  <div id="traits-grid" class="traits-grid"></div><button type="button" id="see-results-top" style="padding:10px 14px; border-radius:10px; border:1px solid #e5e7eb; background:#ffd166; color:#1a1500; font-weight:700; cursor:pointer;">See My Trait-Based Results</button></div>
+    <div class="traits-header"><h2 class="traits-title">Select your traits</h2>
+<div id="traits-grid" class="traits-grid"></div>
+<p id="select-nudge" style="margin:6px 0 0; color:#cbe0ff; font-size:14px;">Select at least one trait to continue.</p>
+<div id="cta-bottom-wrap"><button id="see-results-bottom" class="cta-bottom">See My Trait-Based Results</button></div><button type="button" id="see-results-top" class="cta-top">See My Trait-Based Results</button></div>
     <button class="btn-primary" onclick="showResults()">See My Trait-Based Results</button>
   </header>
 
@@ -232,6 +246,118 @@
     });
     updateBtn();
   });
+
+
+// Ensure hardcoded list is present
+if (typeof TRAITS === 'undefined') {
+  window.TRAITS = [
+    {title: 'Visionary', desc: 'Sees future possibilities and patterns quickly.'},
+    {title: 'Analytical', desc: 'Breaks problems down and validates with data.'},
+    {title: 'Strategic', desc: 'Finds leverage points that move the whole system.'},
+    {title: 'Communicator', desc: 'Explains complex ideas clearly and persuasively.'},
+    {title: 'Leadership', desc: 'Mobilizes people and delivers outcomes.'},
+    {title: 'Creative', desc: 'Generates fresh, useful solutions.'},
+    {title: 'Detail‑oriented', desc: 'Notices small facts that improve quality.'},
+    {title: 'Adaptable', desc: 'Shifts approaches quickly as conditions change.'},
+    {title: 'Resilient', desc: 'Bounces back and perseveres through setbacks.'},
+    {title: 'Empathetic', desc: 'Reads others’ emotions and responds with care.'},
+    {title: 'Organized', desc: 'Plans, prioritizes, and tracks work effectively.'},
+    {title: 'Process‑oriented', desc: 'Builds repeatable systems that improve results.'},
+    {title: 'Quality‑minded', desc: 'Insists on high standards and polish.'},
+    {title: 'Data‑driven', desc: 'Uses metrics to guide decisions.'},
+    {title: 'Curious', desc: 'Asks great questions and explores widely.'},
+    {title: 'Quick learner', desc: 'Picks up new tools and domains fast.'},
+    {title: 'Systems thinker', desc: 'Understands how pieces interact in a whole.'},
+    {title: 'Results‑oriented', desc: 'Focuses on outcomes and impact.'},
+    {title: 'Collaborative', desc: 'Builds trust and works well across teams.'},
+    {title: 'Independent', desc: 'Manages self and moves work forward solo.'},
+    {title: 'Initiator', desc: 'Spots opportunities and takes the first step.'},
+    {title: 'Customer‑focused', desc: 'Centers users’ needs in decisions.'},
+    {title: 'User‑centered', desc: 'Designs with empathy and usability in mind.'},
+    {title: 'Problem solver', desc: 'Cuts through ambiguity to solutions.'},
+    {title: 'Planner', desc: 'Maps steps, risks, and resources.'},
+    {title: 'Presenter', desc: 'Communicates to groups with confidence.'},
+    {title: 'Writer', desc: 'Creates clear, compelling written content.'},
+    {title: 'Researcher', desc: 'Finds insights through structured inquiry.'},
+    {title: 'Innovative', desc: 'Pushes beyond the obvious to new value.'},
+    {title: 'Networker', desc: 'Builds relationships and opens doors.'},
+    {title: 'Mentor', desc: 'Develops others with feedback and support.'},
+    {title: 'Coach', desc: 'Guides people to their own best answers.'},
+    {title: 'Facilitator', desc: 'Leads groups to shared decisions.'},
+    {title: 'Negotiator', desc: 'Finds win‑wins and closes agreements.'},
+    {title: 'Ethical', desc: 'Acts with integrity and responsibility.'},
+    {title: 'Decisive', desc: 'Chooses a path and commits.'},
+    {title: 'Calm under pressure', desc: 'Stays steady when stakes are high.'},
+    {title: 'Comfortable with risk', desc: 'Takes smart risks to move forward.'},
+    {title: 'Resourceful', desc: 'Finds a way with limited resources.'},
+    {title: 'Organizer of chaos', desc: 'Brings clarity to messy situations.'},
+    {title: 'Tech‑savvy', desc: 'Learns and applies technology quickly.'},
+    {title: 'Process improver', desc: 'Continuously refines how work is done.'},
+    {title: 'Visual thinker', desc: 'Communicates ideas with visuals.'},
+    {title: 'Storyteller', desc: 'Connects ideas in narrative form.'},
+    {title: 'Numerate', desc: 'Thinks in models, metrics, and ROI.'},
+    {title: 'Connector', desc: 'Links people and opportunities at the right moment.'},
+    {title: 'Executor', desc: 'Gets things done with quality.'},
+    {title: 'Steadfast', desc: 'Dependable; calm under changing demands.'},
+    {title: 'Strategic vision', desc: 'Sets direction that others can follow.'},
+    {title: 'Client relations', desc: 'Builds strong, lasting client partnerships.'}
+  ];
+}
+
+function renderTraitsGrid() {
+  const grid = document.getElementById('traits-grid');
+  if (!grid) return;
+  grid.innerHTML = TRAITS.map(t => `
+    <label class="trait-card">
+      <input type="checkbox" name="trait" value="${t.title}">
+      <div class="card-face">
+        <div class="trait-title">${t.title}</div>
+        <div class="trait-desc">${t.desc}</div>
+      </div>
+    </label>
+  `).join('');
+
+  function updateState() {
+    const selected = Array.from(grid.querySelectorAll('input[name="trait"]:checked'));
+    const show = selected.length > 0;
+    const top = document.getElementById('see-results-top');
+    const bottom = document.getElementById('see-results-bottom');
+    const nudge = document.getElementById('select-nudge');
+    if (top) top.style.display = show ? 'inline-block' : 'none';
+    if (bottom) bottom.style.display = show ? 'inline-block' : 'none';
+    if (nudge) nudge.style.display = show ? 'none' : 'block';
+  }
+
+  grid.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    const face = cb.parentElement.querySelector('.card-face');
+    function sync() { face.classList.toggle('selected', cb.checked); updateState(); }
+    cb.addEventListener('change', sync); sync();
+  });
+
+  // Hide any legacy duplicate CTAs
+  document.querySelectorAll('button, a').forEach(el => {
+    if (/See My Trait-Based Results/i.test(el.textContent) && !el.id.match(/see-results-(top|bottom)/)) {
+      el.style.display = 'none';
+    }
+  });
+
+  // Initial state
+  const top = document.getElementById('see-results-top'); if (top) top.style.display='none';
+  const bottom = document.getElementById('see-results-bottom'); if (bottom) bottom.style.display='none';
+  const nudge = document.getElementById('select-nudge'); if (nudge) nudge.style.display='block';
+
+  // Click handlers to save & go to results
+  function goResults() {
+    const chosen = Array.from(grid.querySelectorAll('input[name="trait"]:checked')).map(x => x.value);
+    if (chosen.length === 0) return;
+    try { localStorage.setItem('novaSelectedTraits', JSON.stringify(chosen)); } catch(e) {}
+    window.location.href = 'results.html?ts=' + Date.now();
+  }
+  top?.addEventListener('click', goResults);
+  bottom?.addEventListener('click', goResults);
+}
+
+document.addEventListener('DOMContentLoaded', renderTraitsGrid);
 
 </script>
 </body>
