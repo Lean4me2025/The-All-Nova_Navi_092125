@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA → Pathways</title>
+  <style>
+    :root { --ink:#eaf1ff; --bg:#0b1636; --edge:rgba(255,255,255,0.12); --card:rgba(255,255,255,0.05); --accent:#ffd166; }
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:var(--bg); color:var(--ink); }
+    a { text-decoration:none; }
+    header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#0f1e44; border-bottom:1px solid var(--edge); position:sticky; top:0; z-index:10; }
+    .btn { display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid #d1d5db; background:#fff; color:#0f172a; }
+    .wrap { max-width:1024px; margin:22px auto; padding:0 16px; }
+    .lead { background:var(--card); border:1px solid var(--edge); border-radius:14px; padding:16px; margin-bottom:14px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; }
+    .card { background:var(--card); border:1px solid var(--edge); border-radius:14px; padding:16px; }
+    .card h3 { margin:0 0 6px 0; }
+    .card p { margin:0 0 10px 0; color:#cbe0ff; }
+    .go { display:inline-block; padding:10px 12px; border-radius:10px; border:1px solid #e5e7eb; background:var(--accent); color:#1a1500; font-weight:700; }
+    .skip { display:inline-block; padding:10px 12px; border-radius:10px; border:1px solid #e5e7eb; background:transparent; color:#eaf1ff; margin-left:8px; }
+    footer { max-width:1024px; margin:16px auto; padding:0 16px; color:#b9c9ff; }
+  </style>
+</head>
+<body>
+  <header>
+    <div><b>NOVA</b> → Pathways</div>
+    <div><a class="btn" href="index.html">← Back to Results</a></div>
+  </header>
+
+  <main class="wrap">
+    <div class="lead">
+      <h2 style="margin:0 0 6px 0;">Where are you in your journey?</h2>
+      <p style="margin:0;">Purpose is personal. Take a moment to reflect — pick the path that best describes you. If you’re not ready to choose, you can skip and view plans.</p>
+    </div>
+
+    <section class="grid">
+      <div class="card">
+        <h3>1) I’m in a field that doesn’t match my purpose</h3>
+        <p>You’ve built valuable skills (e.g., IT) but your NOVA results point elsewhere (e.g., psychology). We’ll help you pivot with a stepwise plan.</p>
+        <a class="go" href="plans.html?path=career_shift" onclick="remember('career_shift')">Continue →</a>
+      </div>
+      <div class="card">
+        <h3>2) I’m partly aligned and want to go deeper</h3>
+        <p>Some of what you do already fits your purpose. We’ll help you sharpen focus and move into higher‑fit roles.</p>
+        <a class="go" href="plans.html?path=go_deeper" onclick="remember('go_deeper')">Continue →</a>
+      </div>
+      <div class="card">
+        <h3>3) I’m just starting out and want to get it right</h3>
+        <p>Launch in the right direction. Align training, projects, and first roles to your purpose from the start.</p>
+        <a class="go" href="plans.html?path=starting_out" onclick="remember('starting_out')">Continue →</a>
+      </div>
+      <div class="card">
+        <h3>4) I feel lost and unsure where I belong</h3>
+        <p>It’s okay to be unclear. We’ll translate your traits into options and first steps, then build momentum together.</p>
+        <a class="go" href="plans.html?path=unsure" onclick="remember('unsure')">Continue →</a>
+      </div>
+    </section>
+
+    <div style="margin-top:14px;">
+      <a class="go" href="plans.html">Skip reflection — see plans</a>
+    </div>
+  </main>
+
+  <footer>
+    You haven’t lost time — every step brought you to clarity. The next step is yours.
+  </footer>
+
+<script>
+  function remember(val) {
+    try { localStorage.setItem('naviPath', val); } catch(e) { /* no-op */ }
+  }
+</script>
+</body>
+</html>
