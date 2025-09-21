@@ -1,93 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NOVA – Discover Your Core Traits</title>
-<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
-<style>
-:root{--nova:#0f1e44;--ink:#10131a;--muted:#6b7280;--edge:#e5e7eb;--accent:#ffd166;--card:#ffffff}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#0b1636}
-a{color:inherit;text-decoration:none}section{max-width:1024px;margin:32px auto;padding:0 20px}
-.brand-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--nova);color:#fff;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:10}
-.brand-left{display:flex;align-items:center;gap:12px}.brand-mark{font-weight:800;letter-spacing:.5px;font-size:22px}.brand-tagline{opacity:.85;font-size:14px}
-.hero{color:#eaf1ff}.hero-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px}.hero h1{font-size:44px;line-height:1.1;margin:0 0 10px 0}.hero p{font-size:18px;color:#cbd5e1;margin:0 0 16px 0}.cta-row{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-block;padding:12px 18px;border-radius:10px;border:1px solid var(--edge);background:var(--accent);color:#1a1500;font-weight:700}.btn.secondary{background:transparent;color:#eaf1ff;border-color:rgba(255,255,255,0.2)}
-.traits-wrap{background:#0f1e44;border:1px solid rgba(255,255,255,0.12);border-radius:16px;color:#eaf1ff;padding:22px}.traits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.trait{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px}.trait label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.trait input{margin-top:4px}.muted{color:#cbd5e1}.btn-lite{padding:10px 14px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:#0f172a;cursor:pointer}.btn-lite:hover{background:#f5f5f5}
-#results-card{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:24px;box-shadow:0 10px 24px rgba(0,0,0,.06)}.pill{display:inline-block;margin:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--edge);background:#fafafa;font-weight:600}.plans{display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:20px}.plan{flex:1;min-width:200px;text-align:center;margin:10px;padding:15px;background:#fff;border:1px solid #ddd;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.05)}.plan h4{margin:8px 0}.plan p{font-weight:bold;margin:6px 0 12px;color:#333}.bridge-note{max-width:1024px;margin:18px auto 28px;padding:12px 14px;font-size:13px;line-height:1.4;color:#4a3b14;background:#fff8e6;border:1px solid #f1d48a;border-radius:8px}
-@media print{.no-print{display:none !important}body{background:#fff}#results-card{box-shadow:none;border:none}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA – Discover Your Core Traits</title>
+  <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+  <style>
+    :root {
+      --nova:#0f1e44; --ink:#10131a; --muted:#6b7280; --edge:#e5e7eb; --accent:#ffd166; --card:#ffffff;
+      --cardBg: rgba(255,255,255,0.04); --cardStroke: rgba(255,255,255,0.12);
+      --cardActive: rgba(255,255,255,0.14); --glow: rgba(255,255,255,0.25);
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--ink); background:#0b1636; }
+    a { text-decoration:none; }
+    section { max-width:1024px; margin:32px auto; padding:0 20px; }
+
+    .brand-header { display:flex; align-items:center; justify-content:space-between;
+      padding:14px 20px; background:var(--nova); color:#fff; border-bottom:1px solid rgba(255,255,255,.08);
+      position:sticky; top:0; z-index:10; }
+    .brand-left { display:flex; align-items:center; gap:12px; }
+    .brand-mark { font-weight:800; letter-spacing:.5px; font-size:22px; }
+    .brand-tagline { opacity:.85; font-size:14px; }
+
+    .hero { color:#eaf1ff; }
+    .hero-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:28px; }
+    .hero h1 { font-size:44px; line-height:1.1; margin:0 0 10px 0; }
+    .hero p { font-size:18px; color:#cbd5e1; margin:0 0 16px 0; }
+    .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:12px 18px; border-radius:10px; border:1px solid var(--edge);
+      background:var(--accent); color:#1a1500; font-weight:700; }
+    .btn.secondary { background:transparent; color:#eaf1ff; border-color:rgba(255,255,255,0.2); }
+
+    .traits-wrap { background:#0f1e44; border:1px solid rgba(255,255,255,0.12); border-radius:16px; color:#eaf1ff; padding:22px; }
+    .traits-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
+    .trait-check { position:absolute; opacity:0; pointer-events:none; }
+    .trait-card { display:block; background:var(--cardBg); border:1px solid var(--cardStroke); border-radius:12px;
+      padding:14px; cursor:pointer; transition:.2s ease; }
+    .trait-card:hover { border-color:#9ecfff; box-shadow:0 0 0 2px rgba(158,207,255,.2) inset; }
+    .trait-title { font-weight:800; margin-bottom:4px; color:#f5f9ff; }
+    .trait-desc { color:#d6e2ff; font-size:14px; line-height:1.35; }
+    .trait-check:checked + .trait-card {
+      background: var(--cardActive);
+      border-color: #b7e1ff;
+      box-shadow: 0 6px 22px rgba(0,0,0,.25), 0 0 0 2px var(--glow) inset;
+    }
+
+    .muted { color:#cbd5e1; }
+    .btn-lite { padding:10px 14px; border-radius:8px; border:1px solid #d1d5db; background:#fff; color:#0f172a; cursor:pointer; }
+    .btn-lite:hover { background:#f5f5f5; }
+
+    #results-card { background:var(--card); border:1px solid var(--edge); border-radius:12px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,.06); }
+    .pill { display:inline-block; margin:6px; padding:8px 12px; border-radius:999px; border:1px solid var(--edge); background:#fafafa; font-weight:600; }
+
+    .plans { display:flex; justify-content:space-around; flex-wrap:wrap; margin-top:20px; }
+    .plan { flex:1; min-width:200px; text-align:center; margin:10px; padding:15px; background:#fff; border:1px solid #ddd; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.05); }
+    .plan h4 { margin:8px 0; }
+    .plan p { font-weight:bold; margin:6px 0 12px; color:#333; }
+
+    .bridge-note { max-width:1024px; margin:18px auto 28px; padding:12px 14px; font-size:13px; line-height:1.4; color:#4a3b14; background:#fff8e6; border:1px solid #f1d48a; border-radius:8px; }
+
+    @media print {
+      .no-print { display:none !important; }
+      body { background:#fff; }
+      #results-card { box-shadow:none; border:none; }
+    }
+  </style>
 </head>
 <body>
-<header class="brand-header"><div class="brand-left"><span class="brand-mark">NOVA</span><span class="brand-tagline">Discover your core traits</span></div></header>
-<section class="hero"><div class="hero-card"><h1>Discover Your Purpose.</h1><p>Nova helps you reveal your core traits and strengths. Free results first—no membership required.</p><div class="cta-row"><a class="btn" href="#traits-screen">Start with Nova</a><a class="btn secondary" href="navi.html">Learn about Navi</a></div></div></section>
-<section class="hero"><div class="hero-card"><h2>Three simple steps</h2><ul style="color:#cbd5e1;line-height:1.7"><li><b>Discover:</b> Select <b>5 or more</b> traits that fit you best in NOVA.</li><li><b>Report:</b> See your results instantly in NOVA (and print/save if you like).</li><li><b>Path:</b> When you’re ready, continue into NAVI with a membership.</li></ul></div></section>
-<section id="traits-screen"><div class="traits-wrap"><h2>Select your traits</h2><p class="muted">Select <b>5 or more</b> traits that fit you best. You can refine any time.</p><form id="traits-form"><div class="traits-grid">
-<div class="trait"><label><input type="checkbox" name="trait" value="Visionary"> <div><b>Visionary</b><div>Sees future possibilities and patterns quickly.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Analytical"> <div><b>Analytical</b><div>Breaks problems down and validates with data.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Strategic"> <div><b>Strategic</b><div>Finds leverage points that move the whole system.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Communicator"> <div><b>Communicator</b><div>Explains complex ideas clearly and persuasively.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Leadership"> <div><b>Leadership</b><div>Mobilizes people and delivers outcomes.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Creative"> <div><b>Creative</b><div>Generates fresh, useful solutions.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Empathetic"> <div><b>Empathetic</b><div>Reads others' emotions and responds with care.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Detail-oriented"> <div><b>Detail-oriented</b><div>Notices small facts that improve quality.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Resilient"> <div><b>Resilient</b><div>Bounces back and perseveres through setbacks.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Adaptable"> <div><b>Adaptable</b><div>Shifts approaches quickly as conditions change.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Collaborative"> <div><b>Collaborative</b><div>Works well in teams and integrates perspectives.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Independent"> <div><b>Independent</b><div>Drives work autonomously with minimal direction.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Curious"> <div><b>Curious</b><div>Asks questions and explores new ideas.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Driven"> <div><b>Driven</b><div>Sets ambitious goals and pursues them relentlessly.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Organized"> <div><b>Organized</b><div>Structures work and keeps things on track.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Persuasive"> <div><b>Persuasive</b><div>Influences others and gains buy-in.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Tech-savvy"> <div><b>Tech-savvy</b><div>Learns and uses technical tools effectively.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Customer-focused"> <div><b>Customer-focused</b><div>Designs for user needs and satisfaction.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Ethical"> <div><b>Ethical</b><div>Acts with integrity and strong principles.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Results-oriented"> <div><b>Results-oriented</b><div>Prioritizes measurable outcomes and impact.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Systems-thinker"> <div><b>Systems-thinker</b><div>Understands interdependent parts and dynamics.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Risk-taker"> <div><b>Risk-taker</b><div>Comfortable making decisions under uncertainty.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Intuitive"> <div><b>Intuitive</b><div>Makes fast, sensible judgments from experience.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Negotiator"> <div><b>Negotiator</b><div>Finds mutual wins and closes agreements.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Mentoring"> <div><b>Mentoring</b><div>Coaches others to grow and succeed.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Process-oriented"> <div><b>Process-oriented</b><div>Defines repeatable, efficient processes.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Quick-learner"> <div><b>Quick-learner</b><div>Picks up new skills and knowledge rapidly.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Planner"> <div><b>Planner</b><div>Creates clear plans and timelines.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Resourceful"> <div><b>Resourceful</b><div>Finds ways to get things done with limited resources.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Patient"> <div><b>Patient</b><div>Stays calm and persistent over time.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Decisive"> <div><b>Decisive</b><div>Makes timely choices and moves forward.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Innovative"> <div><b>Innovative</b><div>Regularly introduces new approaches.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Data-driven"> <div><b>Data-driven</b><div>Uses metrics to guide decisions.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Visual-thinker"> <div><b>Visual-thinker</b><div>Uses imagery and diagrams to reason.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Storyteller"> <div><b>Storyteller</b><div>Frames ideas into compelling narratives.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Facilitator"> <div><b>Facilitator</b><div>Guides groups to productive outcomes.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Multilingual"> <div><b>Multilingual</b><div>Communicates across languages and cultures.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Coach"> <div><b>Coach</b><div>Builds skills through feedback and practice.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Budgeting"> <div><b>Budgeting</b><div>Manages resources and financial planning.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Networking"> <div><b>Networking</b><div>Builds valuable professional relationships.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="User-centered"> <div><b>User-centered</b><div>Designs solutions focused on people.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Execution-focused"> <div><b>Execution-focused</b><div>Turns plans into delivered results.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Quality-focused"> <div><b>Quality-focused</b><div>Maintains high standards in delivery.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Analytical-research"> <div><b>Analytical-research</b><div>Conducts deep investigation and research.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Process-improvement"> <div><b>Process-improvement</b><div>Continuously improves workflows.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Strategic-vision"> <div><b>Strategic-vision</b><div>Sets long-term direction and strategy.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Client-relations"> <div><b>Client-relations</b><div>Manages client expectations and satisfaction.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Compliance-minded"> <div><b>Compliance-minded</b><div>Ensures policies and standards are followed.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Presentation-skill"> <div><b>Presentation-skill</b><div>Delivers clear, confident presentations.</div></div></label></div>\n<div class="trait"><label><input type="checkbox" name="trait" value="Emotional-intelligence"> <div><b>Emotional-intelligence</b><div>Regulates emotions and reads social cues.</div></div></label></div>\n
-</div><div style="margin-top:16px"><button type="submit" class="btn-lite" id="generate-btn">Generate My Report</button></div></form></div></section>
-<section id="results-screen" hidden><div id="results-card"><h2>Your NOVA Results</h2><div class="no-print" style="margin:8px 0 16px;"><button id="back-btn" class="btn-lite">← Edit Traits</button><button id="print-btn" class="btn-lite">Print / Save PDF</button></div><h3 id="result-headline"></h3><p id="result-summary"></p><div id="top-traits"></div><div id="clusters"></div><div id="recommendations"></div></div>
-<section class="no-print" style="text-align:center;margin-top:24px;"><h2>Continue your journey with NAVI</h2><p style="color:#555;margin-top:-8px;">Choose a membership to activate resume rewrites, job filters, and more.</p><div class="plans">
-<div class="plan"><h4>NAVI Starter Plan</h4><p>$29.99 / month</p><a href="https://payhip.com/b/GdfU7" class="payhip-buy-button" data-theme="green" data-product="GdfU7">Buy Now</a></div>
-<div class="plan"><h4>NAVI PRO Plan</h4><p>$99 / month</p><a href="https://payhip.com/b/knC1Z" class="payhip-buy-button" data-theme="green" data-product="knC1Z">Buy Now</a></div>
-<div class="plan"><h4>NAVI Pro Suite Plan</h4><p>$149 / month</p><a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy Now</a></div>
-<div class="plan"><h4>How to Know Your Purpose</h4><p>Free / Paid Download</p><a href="https://payhip.com/b/N7Lvg" class="payhip-buy-button" data-theme="green" data-product="N7Lvg">Buy Now</a></div>
-</div></section></section>
-<footer class="bridge-note no-print">You’re currently in <b>NOVA</b> (free results). To apply your results with advanced tools like resume rewrites and job filters, continue in <b>NAVI</b> (paid membership).</footer>
+  <header class="brand-header">
+    <div class="brand-left">
+      <span class="brand-mark">NOVA</span>
+      <span class="brand-tagline">Discover your core traits</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <h1>Discover Your Purpose.</h1>
+      <p>Nova helps you reveal your core traits and strengths. Free results first—no membership required.</p>
+      <div class="cta-row">
+        <a class="btn" href="#traits-screen">Start with Nova</a>
+        <a class="btn secondary" href="navi.html">Learn about Navi</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Three simple steps</h2>
+      <ul style="color:#cbd5e1; line-height:1.7;">
+        <li><b>Discover:</b> Select <b>5 or more</b> traits that fit you best in NOVA.</li>
+        <li><b>Report:</b> See your results instantly in NOVA (and print/save if you like).</li>
+        <li><b>Path:</b> When you’re ready, continue into NAVI with a membership.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="traits-screen">
+    <div class="traits-wrap">
+      <h2>Select your traits</h2>
+      <p class="muted">Select <b>5 or more</b> traits that fit you best. You can refine any time.</p>
+      <form id="traits-form">
+        <div class="traits-grid">
+
+        <input type="checkbox" id="t1" name="trait" value="Visionary" class="trait-check" />
+        <label for="t1" class="trait-card">
+          <div class="trait-title">Visionary</div>
+          <div class="trait-desc">Sees future possibilities and patterns quickly.</div>
+        </label>
+
+        <input type="checkbox" id="t2" name="trait" value="Analytical" class="trait-check" />
+        <label for="t2" class="trait-card">
+          <div class="trait-title">Analytical</div>
+          <div class="trait-desc">Breaks problems down and validates with data.</div>
+        </label>
+
+        <input type="checkbox" id="t3" name="trait" value="Strategic" class="trait-check" />
+        <label for="t3" class="trait-card">
+          <div class="trait-title">Strategic</div>
+          <div class="trait-desc">Finds leverage points that move the whole system.</div>
+        </label>
+
+        <input type="checkbox" id="t4" name="trait" value="Communicator" class="trait-check" />
+        <label for="t4" class="trait-card">
+          <div class="trait-title">Communicator</div>
+          <div class="trait-desc">Explains complex ideas clearly and persuasively.</div>
+        </label>
+
+        <input type="checkbox" id="t5" name="trait" value="Leadership" class="trait-check" />
+        <label for="t5" class="trait-card">
+          <div class="trait-title">Leadership</div>
+          <div class="trait-desc">Mobilizes people and delivers outcomes.</div>
+        </label>
+
+        <input type="checkbox" id="t6" name="trait" value="Creative" class="trait-check" />
+        <label for="t6" class="trait-card">
+          <div class="trait-title">Creative</div>
+          <div class="trait-desc">Generates fresh, useful solutions.</div>
+        </label>
+
+        <input type="checkbox" id="t7" name="trait" value="Empathetic" class="trait-check" />
+        <label for="t7" class="trait-card">
+          <div class="trait-title">Empathetic</div>
+          <div class="trait-desc">Reads others' emotions and responds with care.</div>
+        </label>
+
+        <input type="checkbox" id="t8" name="trait" value="Detail‑oriented" class="trait-check" />
+        <label for="t8" class="trait-card">
+          <div class="trait-title">Detail‑oriented</div>
+          <div class="trait-desc">Notices small facts that improve quality.</div>
+        </label>
+
+        <input type="checkbox" id="t9" name="trait" value="Resilient" class="trait-check" />
+        <label for="t9" class="trait-card">
+          <div class="trait-title">Resilient</div>
+          <div class="trait-desc">Bounces back and perseveres through setbacks.</div>
+        </label>
+
+        <input type="checkbox" id="t10" name="trait" value="Adaptable" class="trait-check" />
+        <label for="t10" class="trait-card">
+          <div class="trait-title">Adaptable</div>
+          <div class="trait-desc">Shifts approaches quickly as conditions change.</div>
+        </label>
+
+        <input type="checkbox" id="t11" name="trait" value="Collaborative" class="trait-check" />
+        <label for="t11" class="trait-card">
+          <div class="trait-title">Collaborative</div>
+          <div class="trait-desc">Works well in teams and integrates perspectives.</div>
+        </label>
+
+        <input type="checkbox" id="t12" name="trait" value="Independent" class="trait-check" />
+        <label for="t12" class="trait-card">
+          <div class="trait-title">Independent</div>
+          <div class="trait-desc">Drives work autonomously with minimal direction.</div>
+        </label>
+
+        <input type="checkbox" id="t13" name="trait" value="Curious" class="trait-check" />
+        <label for="t13" class="trait-card">
+          <div class="trait-title">Curious</div>
+          <div class="trait-desc">Asks questions and explores new ideas.</div>
+        </label>
+
+        <input type="checkbox" id="t14" name="trait" value="Driven" class="trait-check" />
+        <label for="t14" class="trait-card">
+          <div class="trait-title">Driven</div>
+          <div class="trait-desc">Sets ambitious goals and pursues them relentlessly.</div>
+        </label>
+
+        <input type="checkbox" id="t15" name="trait" value="Organized" class="trait-check" />
+        <label for="t15" class="trait-card">
+          <div class="trait-title">Organized</div>
+          <div class="trait-desc">Structures work and keeps things on track.</div>
+        </label>
+
+        <input type="checkbox" id="t16" name="trait" value="Persuasive" class="trait-check" />
+        <label for="t16" class="trait-card">
+          <div class="trait-title">Persuasive</div>
+          <div class="trait-desc">Influences others and gains buy‑in.</div>
+        </label>
+
+        <input type="checkbox" id="t17" name="trait" value="Tech‑savvy" class="trait-check" />
+        <label for="t17" class="trait-card">
+          <div class="trait-title">Tech‑savvy</div>
+          <div class="trait-desc">Learns and uses technical tools effectively.</div>
+        </label>
+
+        <input type="checkbox" id="t18" name="trait" value="Customer‑focused" class="trait-check" />
+        <label for="t18" class="trait-card">
+          <div class="trait-title">Customer‑focused</div>
+          <div class="trait-desc">Designs for user needs and satisfaction.</div>
+        </label>
+
+        <input type="checkbox" id="t19" name="trait" value="Ethical" class="trait-check" />
+        <label for="t19" class="trait-card">
+          <div class="trait-title">Ethical</div>
+          <div class="trait-desc">Acts with integrity and strong principles.</div>
+        </label>
+
+        <input type="checkbox" id="t20" name="trait" value="Results‑oriented" class="trait-check" />
+        <label for="t20" class="trait-card">
+          <div class="trait-title">Results‑oriented</div>
+          <div class="trait-desc">Prioritizes measurable outcomes and impact.</div>
+        </label>
+
+        <input type="checkbox" id="t21" name="trait" value="Systems thinker" class="trait-check" />
+        <label for="t21" class="trait-card">
+          <div class="trait-title">Systems thinker</div>
+          <div class="trait-desc">Understands interdependent parts and dynamics.</div>
+        </label>
+
+        <input type="checkbox" id="t22" name="trait" value="Comfortable with risk" class="trait-check" />
+        <label for="t22" class="trait-card">
+          <div class="trait-title">Comfortable with risk</div>
+          <div class="trait-desc">Decides under uncertainty when needed.</div>
+        </label>
+
+        <input type="checkbox" id="t23" name="trait" value="Intuitive" class="trait-check" />
+        <label for="t23" class="trait-card">
+          <div class="trait-title">Intuitive</div>
+          <div class="trait-desc">Makes fast, sensible judgments from experience.</div>
+        </label>
+
+        <input type="checkbox" id="t24" name="trait" value="Negotiator" class="trait-check" />
+        <label for="t24" class="trait-card">
+          <div class="trait-title">Negotiator</div>
+          <div class="trait-desc">Finds mutual wins and closes agreements.</div>
+        </label>
+
+        <input type="checkbox" id="t25" name="trait" value="Mentor" class="trait-check" />
+        <label for="t25" class="trait-card">
+          <div class="trait-title">Mentor</div>
+          <div class="trait-desc">Coaches others to grow and succeed.</div>
+        </label>
+
+        <input type="checkbox" id="t26" name="trait" value="Process‑oriented" class="trait-check" />
+        <label for="t26" class="trait-card">
+          <div class="trait-title">Process‑oriented</div>
+          <div class="trait-desc">Defines repeatable, efficient processes.</div>
+        </label>
+
+        <input type="checkbox" id="t27" name="trait" value="Quick learner" class="trait-check" />
+        <label for="t27" class="trait-card">
+          <div class="trait-title">Quick learner</div>
+          <div class="trait-desc">Picks up new skills and knowledge rapidly.</div>
+        </label>
+
+        <input type="checkbox" id="t28" name="trait" value="Planner" class="trait-check" />
+        <label for="t28" class="trait-card">
+          <div class="trait-title">Planner</div>
+          <div class="trait-desc">Creates clear plans and timelines.</div>
+        </label>
+
+        <input type="checkbox" id="t29" name="trait" value="Resourceful" class="trait-check" />
+        <label for="t29" class="trait-card">
+          <div class="trait-title">Resourceful</div>
+          <div class="trait-desc">Gets things done with limited resources.</div>
+        </label>
+
+        <input type="checkbox" id="t30" name="trait" value="Patient" class="trait-check" />
+        <label for="t30" class="trait-card">
+          <div class="trait-title">Patient</div>
+          <div class="trait-desc">Stays calm and persistent over time.</div>
+        </label>
+
+        <input type="checkbox" id="t31" name="trait" value="Decisive" class="trait-check" />
+        <label for="t31" class="trait-card">
+          <div class="trait-title">Decisive</div>
+          <div class="trait-desc">Makes timely choices and moves forward.</div>
+        </label>
+
+        <input type="checkbox" id="t32" name="trait" value="Innovative" class="trait-check" />
+        <label for="t32" class="trait-card">
+          <div class="trait-title">Innovative</div>
+          <div class="trait-desc">Regularly introduces new approaches.</div>
+        </label>
+
+        <input type="checkbox" id="t33" name="trait" value="Data‑driven" class="trait-check" />
+        <label for="t33" class="trait-card">
+          <div class="trait-title">Data‑driven</div>
+          <div class="trait-desc">Uses metrics to guide decisions.</div>
+        </label>
+
+        <input type="checkbox" id="t34" name="trait" value="Visual thinker" class="trait-check" />
+        <label for="t34" class="trait-card">
+          <div class="trait-title">Visual thinker</div>
+          <div class="trait-desc">Uses imagery and diagrams to reason.</div>
+        </label>
+
+        <input type="checkbox" id="t35" name="trait" value="Storyteller" class="trait-check" />
+        <label for="t35" class="trait-card">
+          <div class="trait-title">Storyteller</div>
+          <div class="trait-desc">Frames ideas into compelling narratives.</div>
+        </label>
+
+        <input type="checkbox" id="t36" name="trait" value="Facilitator" class="trait-check" />
+        <label for="t36" class="trait-card">
+          <div class="trait-title">Facilitator</div>
+          <div class="trait-desc">Guides groups to productive outcomes.</div>
+        </label>
+
+        <input type="checkbox" id="t37" name="trait" value="Multilingual" class="trait-check" />
+        <label for="t37" class="trait-card">
+          <div class="trait-title">Multilingual</div>
+          <div class="trait-desc">Communicates across languages and cultures.</div>
+        </label>
+
+        <input type="checkbox" id="t38" name="trait" value="Coach" class="trait-check" />
+        <label for="t38" class="trait-card">
+          <div class="trait-title">Coach</div>
+          <div class="trait-desc">Builds skills through feedback and practice.</div>
+        </label>
+
+        <input type="checkbox" id="t39" name="trait" value="Budget‑minded" class="trait-check" />
+        <label for="t39" class="trait-card">
+          <div class="trait-title">Budget‑minded</div>
+          <div class="trait-desc">Manages resources and financial planning.</div>
+        </label>
+
+        <input type="checkbox" id="t40" name="trait" value="Networker" class="trait-check" />
+        <label for="t40" class="trait-card">
+          <div class="trait-title">Networker</div>
+          <div class="trait-desc">Builds valuable professional relationships.</div>
+        </label>
+
+        <input type="checkbox" id="t41" name="trait" value="User‑centered" class="trait-check" />
+        <label for="t41" class="trait-card">
+          <div class="trait-title">User‑centered</div>
+          <div class="trait-desc">Designs solutions focused on people.</div>
+        </label>
+
+        <input type="checkbox" id="t42" name="trait" value="Execution‑focused" class="trait-check" />
+        <label for="t42" class="trait-card">
+          <div class="trait-title">Execution‑focused</div>
+          <div class="trait-desc">Turns plans into delivered results.</div>
+        </label>
+
+        <input type="checkbox" id="t43" name="trait" value="Quality‑minded" class="trait-check" />
+        <label for="t43" class="trait-card">
+          <div class="trait-title">Quality‑minded</div>
+          <div class="trait-desc">Maintains high standards in delivery.</div>
+        </label>
+
+        <input type="checkbox" id="t44" name="trait" value="Researcher" class="trait-check" />
+        <label for="t44" class="trait-card">
+          <div class="trait-title">Researcher</div>
+          <div class="trait-desc">Conducts deep investigation and synthesis.</div>
+        </label>
+
+        <input type="checkbox" id="t45" name="trait" value="Process improver" class="trait-check" />
+        <label for="t45" class="trait-card">
+          <div class="trait-title">Process improver</div>
+          <div class="trait-desc">Continuously improves workflows.</div>
+        </label>
+
+        <input type="checkbox" id="t46" name="trait" value="Strategic vision" class="trait-check" />
+        <label for="t46" class="trait-card">
+          <div class="trait-title">Strategic vision</div>
+          <div class="trait-desc">Sets long‑term direction and strategy.</div>
+        </label>
+
+        <input type="checkbox" id="t47" name="trait" value="Client relations" class="trait-check" />
+        <label for="t47" class="trait-card">
+          <div class="trait-title">Client relations</div>
+          <div class="trait-desc">Manages client expectations and satisfaction.</div>
+        </label>
+
+        <input type="checkbox" id="t48" name="trait" value="Compliance minded" class="trait-check" />
+        <label for="t48" class="trait-card">
+          <div class="trait-title">Compliance minded</div>
+          <div class="trait-desc">Ensures policies and standards are followed.</div>
+        </label>
+
+        <input type="checkbox" id="t49" name="trait" value="Presenter" class="trait-check" />
+        <label for="t49" class="trait-card">
+          <div class="trait-title">Presenter</div>
+          <div class="trait-desc">Delivers clear, confident presentations.</div>
+        </label>
+
+        <input type="checkbox" id="t50" name="trait" value="Emotional intelligence" class="trait-check" />
+        <label for="t50" class="trait-card">
+          <div class="trait-title">Emotional intelligence</div>
+          <div class="trait-desc">Regulates emotions and reads social cues.</div>
+        </label>
+        </div>
+        <div style="margin-top:16px">
+          <button type="submit" class="btn-lite" id="generate-btn">Generate My Report</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="results-screen" hidden>
+    <div id="results-card">
+      <h2>Your NOVA Results</h2>
+      <div class="no-print" style="margin:8px 0 16px;">
+        <button id="back-btn" class="btn-lite">← Edit Traits</button>
+        <button id="print-btn" class="btn-lite">Print / Save PDF</button>
+      </div>
+      <h3 id="result-headline"></h3>
+      <p id="result-summary"></p>
+      <div id="top-traits"></div>
+      <div id="clusters"></div>
+      <div id="recommendations"></div>
+    </div>
+
+    <section class="no-print" style="text-align:center; margin-top:24px;">
+      <h2>Continue your journey with NAVI</h2>
+      <p style="color:#555; margin-top:-8px;">Choose a membership to activate resume rewrites, job filters, and more.</p>
+      <div class="plans">
+        <div class="plan">
+          <h4>NAVI Starter Plan</h4>
+          <p>$29.99 / month</p>
+          <a href="https://payhip.com/b/GdfU7" class="payhip-buy-button" data-theme="green" data-product="GdfU7">Buy Now</a>
+        </div>
+        <div class="plan">
+          <h4>NAVI PRO Plan</h4>
+          <p>$99 / month</p>
+          <a href="https://payhip.com/b/knC1Z" class="payhip-buy-button" data-theme="green" data-product="knC1Z">Buy Now</a>
+        </div>
+        <div class="plan">
+          <h4>NAVI Pro Suite Plan</h4>
+          <p>$149 / month</p>
+          <a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy Now</a>
+        </div>
+        <div class="plan">
+          <h4>How to Know Your Purpose</h4>
+          <p>Free / Paid Download</p>
+          <a href="https://payhip.com/b/N7Lvg" class="payhip-buy-button" data-theme="green" data-product="N7Lvg">Buy Now</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <footer class="bridge-note no-print">
+    You’re currently in <b>NOVA</b> (free results). To apply your results with advanced tools like resume rewrites and job filters, continue in <b>NAVI</b> (paid membership).
+  </footer>
+
 <script>
-const traitToCluster = {
-const traitToCluster = {
+  const traitToCluster = {
   'Visionary': 'Design & Innovation',
   'Creative': 'Design & Innovation',
-  'Visual-thinker': 'Design & Innovation',
-  'Storyteller': 'Design & Innovation',
   'Innovative': 'Design & Innovation',
+  'Visual thinker': 'Design & Innovation',
+  'Storyteller': 'Design & Innovation',
+  'User‑centered': 'Design & Innovation',
+  'Strategic vision': 'Design & Innovation',
+  'Presenter': 'Design & Innovation',
   'Analytical': 'Data & Strategy',
   'Strategic': 'Data & Strategy',
-  'Data-driven': 'Data & Strategy',
-  'Analytical-research': 'Data & Strategy',
-  'Process-improvement': 'Data & Strategy',
+  'Data‑driven': 'Data & Strategy',
+  'Researcher': 'Data & Strategy',
+  'Process improver': 'Data & Strategy',
   'Planner': 'Data & Strategy',
+  'Systems thinker': 'Data & Strategy',
+  'Results‑oriented': 'Data & Strategy',
   'Leadership': 'People & Operations',
   'Communicator': 'People & Operations',
-  'Mentoring': 'People & Operations',
+  'Mentor': 'People & Operations',
   'Coach': 'People & Operations',
   'Facilitator': 'People & Operations',
-  'Client-relations': 'People & Operations',
-  'Networking': 'People & Operations',
+  'Client relations': 'People & Operations',
+  'Networker': 'People & Operations',
+  'Emotional intelligence': 'People & Operations',
   'Organized': 'Execution & Delivery',
-  'Execution-focused': 'Execution & Delivery',
-  'Quality-focused': 'Execution & Delivery',
-  'Process-oriented': 'Execution & Delivery',
+  'Execution‑focused': 'Execution & Delivery',
+  'Quality‑minded': 'Execution & Delivery',
+  'Process‑oriented': 'Execution & Delivery',
   'Resourceful': 'Execution & Delivery',
-  'Budgeting': 'Execution & Delivery',
-  'Curious': 'Growth & Curiosity',
-  'Quick-learner': 'Growth & Curiosity',
-  'Driven': 'Growth & Curiosity',
-  'Adaptable': 'Growth & Curiosity',
-  'Resilient': 'Growth & Curiosity',
-  'Risk-taker': 'Growth & Curiosity',
-  'Customer-focused': 'Customer & Product',
-  'User-centered': 'Customer & Product',
-  'Presentation-skill': 'Customer & Product',
-  'Multilingual': 'Customer & Product',
-  'Client-relations': 'Customer & Product',
-};
+  'Budget‑minded': 'Execution & Delivery',
+  'Compliance minded': 'Execution & Delivery',
+  'Presenter': 'Execution & Delivery',
+  'Curious': 'Growth & Agility',
+  'Quick learner': 'Growth & Agility',
+  'Adaptable': 'Growth & Agility',
+  'Resilient': 'Growth & Agility',
+  'Comfortable with risk': 'Growth & Agility',
+  'Decisive': 'Growth & Agility',
+  'Independent': 'Growth & Agility',
+  'Driven': 'Growth & Agility',
+  'Empathetic': 'Service & Care',
+  'Customer‑focused': 'Service & Care',
+  'Patient': 'Service & Care',
+  'Multilingual': 'Service & Care',
+  'Ethical': 'Service & Care',
+  };
 
   const clusterBlurbs = {
     'Design & Innovation': 'You excel in ideation, UX, and creating fresh, valuable solutions.',
     'Data & Strategy': 'You shine when solving complex problems and guiding decisions with evidence.',
     'People & Operations': 'You mobilize teams, set direction, and deliver consistent outcomes.',
     'Execution & Delivery': 'You reliably turn work into polished, repeatable outcomes.',
-    'Growth & Curiosity': 'You learn fast and expand capability through experimentation.',
-    'Customer & Product': 'You design with the user in mind and deliver market-fit solutions.'
+    'Growth & Agility': 'You learn fast and expand capability through experimentation.',
+    'Service & Care': 'You design with care for people and deliver helpful experiences.'
   };
+
   const recs = {
     'Design & Innovation': ['Product Designer','Innovation Manager','Brand Strategist'],
     'Data & Strategy': ['Business Analyst','Data Scientist','Process Engineer'],
     'People & Operations': ['Operations Manager','People Lead','Program Director'],
     'Execution & Delivery': ['Project Manager','Program Manager','Implementation Lead'],
-    'Growth & Curiosity': ['Growth PM','Researcher','Strategy Associate'],
-    'Customer & Product': ['Product Manager','Customer Success Lead','UX Researcher']
+    'Growth & Agility': ['Growth PM','Researcher','Strategy Associate'],
+    'Service & Care': ['Customer Success Lead','UX Researcher','Community Manager']
   };
+
   const form = document.getElementById('traits-form');
   const traitsScreen = document.getElementById('traits-screen');
   const resultsScreen = document.getElementById('results-screen');
@@ -96,34 +533,45 @@ const traitToCluster = {
   const topTraitsEl = document.getElementById('top-traits');
   const clustersEl = document.getElementById('clusters');
   const recommendationsEl = document.getElementById('recommendations');
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const selected = Array.from(form.querySelectorAll('input[name="trait"]:checked')).map(i => i.value);
     if (selected.length < 5) { alert('Please select 5 or more traits to generate your report.'); return; }
+
     const clusterScores = {};
     selected.forEach(tr => {
       const c = traitToCluster[tr] || 'Other';
       clusterScores[c] = (clusterScores[c] || 0) + 1;
     });
+
     traitsScreen.hidden = true;
     resultsScreen.hidden = false;
     window.scrollTo({ top: document.getElementById('results-screen').offsetTop - 20, behavior: 'smooth' });
-    headlineEl.textContent = 'Here\'s what your traits reveal:';
+
+    headlineEl.textContent = "Here’s what your traits reveal:";
     summaryEl.textContent = `You selected ${selected.length} core traits.`;
+
     topTraitsEl.innerHTML = '<h4>Your Top Traits:</h4>' + selected.map(tr => `<span class="pill">${tr}</span>`).join('');
+
     const ranked = Object.entries(clusterScores).sort((a,b) => b[1]-a[1]);
-    clustersEl.innerHTML = '<h4>Your Strength Clusters:</h4>' + ranked.map(([c,score]) => `<p><b>${c}</b> (${score}) – ${clusterBlurbs[c] || ''}</p>`).join('');
+    clustersEl.innerHTML = '<h4>Your Strength Clusters:</h4>' +
+      ranked.map(([c,score]) => `<p><b>${c}</b> (${score}) – ${clusterBlurbs[c] || ''}</p>`).join('');
+
     const seen = new Set();
-    recommendationsEl.innerHTML = '<h4>Suggested Roles:</h4>' + ranked.map(([c]) => {
-      const list = (recs[c] || []).filter(r => !seen.has(r) && seen.add(r));
-      return list.length ? `<ul>${list.map(r => `<li>${r}</li>`).join('')}</ul>` : '';
-    }).join('');
+    recommendationsEl.innerHTML = '<h4>Suggested Roles:</h4>' +
+      ranked.map(([c]) => {
+        const list = (recs[c] || []).filter(r => !seen.has(r) && seen.add(r));
+        return list.length ? `<ul>${list.map(r => `<li>${r}</li>`).join('')}</ul>` : '';
+      }).join('');
   });
+
   document.getElementById('back-btn')?.addEventListener('click', () => {
     resultsScreen.hidden = true;
     traitsScreen.hidden = false;
     window.scrollTo({ top: document.getElementById('traits-screen').offsetTop - 20, behavior: 'smooth' });
   });
+
   document.getElementById('print-btn')?.addEventListener('click', () => window.print());
 </script>
 </body>
