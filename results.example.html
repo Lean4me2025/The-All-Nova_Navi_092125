@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NOVA · Results</title>
+  <style>
+:root{--bg:#0b1228;--panel:#0c1736;--ink:#eaf1ff;--sub:#cbe0ff;--edge:rgba(255,255,255,.14);--accent:#ffd166}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 16px;background:var(--panel);border-bottom:1px solid var(--edge)}
+.brand{font-weight:900;letter-spacing:.4px}
+main{max-width:1100px;margin:28px auto;padding:0 16px}
+.card{background:rgba(255,255,255,.05);border:1px solid var(--edge);border-radius:14px;padding:18px;margin-bottom:14px}
+.h1{font-size:28px;font-weight:900;margin:0 0 8px}
+.lead{color:var(--sub);margin:0 0 14px}
+.btn{padding:12px 16px;border-radius:10px;border:1px solid #e5e7eb;background:var(--accent);color:#1a1500;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.link{color:#9fc5ff;text-decoration:underline;cursor:pointer}
+.notice{padding:10px 12px;border-left:3px solid var(--accent);background:rgba(255,209,102,.09);border-radius:8px}
+/* Breadcrumb */
+#nova-breadcrumb{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:rgba(255,255,255,0.04);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
+#nova-breadcrumb .crumb{display:flex;align-items:center;gap:8px}
+#nova-breadcrumb .dot{width:7px;height:7px;border-radius:999px;background:#5b6ea1;border:1px solid var(--edge)}
+#nova-breadcrumb .label{color:var(--sub);font-size:13px}
+#nova-breadcrumb .active .label{color:#ffe7a3;font-weight:800}
+#nova-breadcrumb .sep{opacity:.35;color:var(--sub)}
+</style>
+</head>
+<body data-step-index="2">
+<header>
+  <div class="brand">NOVA</div>
+  <nav><a class="link" href="/navi/index.html">Learn about NAVI</a></nav>
+</header>
+
+
+<!-- NOVA Breadcrumb (drop-in) -->
+<nav id="nova-breadcrumb" aria-label="NOVA progress"></nav>
+<script src="./nova-breadcrumb.js"></script>
+<script>
+  // Configure per page (index=0, traits=1, results=2, reflection=3)
+  window.NOVA_BREADCRUMB_STEPS = ["Welcome","Traits","Results","Reflection"];
+  window.NOVA_BREADCRUMB_ACTIVE = document.body.getAttribute('data-step-index') || 0;
+  NovaBreadcrumb.render(NOVA_BREADCRUMB_STEPS, Number(NOVA_BREADCRUMB_ACTIVE));
+</script>
+
+
+<main>
+
+<div class="card">
+  <div class="h1">Your Purpose Results</div>
+  <p class="lead">Here’s what your chosen traits reveal. Reflect, then continue.</p>
+  <a class="btn" href="/reflection.html">Reflect & Next Steps →</a>
+</div>
+
+</main>
+</body>
+</html>
