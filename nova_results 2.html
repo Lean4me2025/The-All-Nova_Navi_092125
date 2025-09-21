@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA – Discover Your Core Traits</title>
+  <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+  <style>
+    :root { --ink:#121212; --muted:#666; --edge:#e6e6e6; --card:#ffffff; --nova:#0f1e44; }
+    * { box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; color: var(--ink); margin:0; background:#f7f9fc; }
+    section { max-width: 980px; margin: 28px auto; padding: 0 20px; }
+
+    /* NOVA brand header (NOVA only) */
+    .brand-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid rgba(255,255,255,.08); background: var(--nova); color:#fff; }
+    .brand-left { display:flex; align-items:center; gap:12px; }
+    .brand-mark { font-weight:800; letter-spacing:.5px; font-size:22px; }
+    .brand-tagline { opacity:.85; font-size:14px; }
+
+    /* Trait cards (demo) */
+    .traits-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
+    .trait { background:#0f1e44; color:#fff; border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:16px; }
+    .trait label { display:flex; gap:10px; align-items:flex-start; cursor:pointer; }
+    .trait input { margin-top:4px; }
+
+    /* Buttons */
+    button, .btn { padding:10px 14px; border-radius:8px; border:1px solid var(--edge); background:#f7f7f7; cursor:pointer; }
+    button:hover, .btn:hover { background:#efefef; }
+
+    /* Results card */
+    #results-card { background: var(--card); border:1px solid var(--edge); border-radius:12px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,.06); }
+    .pill { display:inline-block; margin:6px; padding:8px 12px; border-radius:999px; border:1px solid var(--edge); background:#fafafa; font-weight:600; }
+
+    /* Plans row */
+    .plans { display:flex; justify-content:space-around; flex-wrap:wrap; margin-top:20px; }
+    .plan { flex:1; min-width:200px; text-align:center; margin:10px; padding:15px; background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.05); }
+    .plan h3 { margin-bottom:8px; }
+    .plan p { margin-bottom:12px; font-weight:bold; color:#333; }
+
+    /* Bridge note (bottom of NOVA pages) */
+    .bridge-note { max-width:980px; margin: 0 auto 28px; padding:12px 14px; font-size:13px; line-height:1.4; color:#4a3b14; background:#fff8e6; border:1px solid #f1d48a; border-radius:8px; }
+
+    @media print {
+      .no-print { display:none !important; }
+      body { margin:0; background:#fff; }
+      section { margin:0; padding:0 12px; }
+      #results-card { box-shadow:none; border:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NOVA-only header -->
+  <header class="brand-header">
+    <div class="brand-left">
+      <span class="brand-mark">NOVA</span>
+      <span class="brand-tagline">Discover your core traits</span>
+    </div>
+  </header>
+
+  <!-- Traits Screen -->
+  <section id="traits-screen">
+    <h2>Pick the traits that feel most like you</h2>
+    <p class="muted">Tip: Aim for 8–12. You can refine any time.</p>
+
+    <form id="traits-form">
+      <div class="traits-grid">
+        <!-- demo traits; replace/extend to full 50 -->
+        <div class="trait"><label><input type="checkbox" name="trait" value="Visionary"> <div><b>Visionary</b><div>Sees future possibilities quickly.</div></div></label></div>
+        <div class="trait"><label><input type="checkbox" name="trait" value="Analytical"> <div><b>Analytical</b><div>Breaks problems down and validates with data.</div></div></label></div>
+        <div class="trait"><label><input type="checkbox" name="trait" value="Strategic"> <div><b>Strategic</b><div>Finds leverage points that move the whole system.</div></div></label></div>
+        <div class="trait"><label><input type="checkbox" name="trait" value="Communicator"> <div><b>Communicator</b><div>Explains complex ideas clearly and persuasively.</div></div></label></div>
+        <div class="trait"><label><input type="checkbox" name="trait" value="Leadership"> <div><b>Leadership</b><div>Mobilizes people and delivers outcomes.</div></div></label></div>
+        <div class="trait"><label><input type="checkbox" name="trait" value="Creative"> <div><b>Creative</b><div>Generates fresh, useful solutions.</div></div></label></div>
+      </div>
+
+      <div style="margin-top:16px">
+        <button type="submit" id="generate-btn">Generate My Report</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Results Screen -->
+  <section id="results-screen" hidden>
+    <div id="results-card">
+      <h2>Your NOVA Results</h2>
+      <div class="no-print" style="margin:8px 0 16px;">
+        <button id="back-btn">← Edit Traits</button>
+        <button id="print-btn">Print / Save PDF</button>
+      </div>
+
+      <h3 id="result-headline"></h3>
+      <p id="result-summary"></p>
+
+      <div id="top-traits"></div>
+      <div id="clusters"></div>
+      <div id="recommendations"></div>
+    </div>
+
+    <!-- Membership CTA (still on NOVA page) -->
+    <section class="no-print" style="text-align:center; margin-top:24px;">
+      <h2>Continue your journey with NAVI</h2>
+      <p style="color:#555; margin-top:-8px;">Choose a membership to activate resume rewrites, job filters, and more.</p>
+      <div class="plans">
+        <div class="plan">
+          <h3>NAVI Starter Plan</h3>
+          <p>$29.99 / month</p>
+          <a href="https://payhip.com/b/GdfU7" class="payhip-buy-button" data-theme="green" data-product="GdfU7">Buy Now</a>
+        </div>
+        <div class="plan">
+          <h3>NAVI PRO Plan</h3>
+          <p>$99 / month</p>
+          <a href="https://payhip.com/b/knC1Z" class="payhip-buy-button" data-theme="green" data-product="knC1Z">Buy Now</a>
+        </div>
+        <div class="plan">
+          <h3>NAVI Pro Suite Plan</h3>
+          <p>$149 / month</p>
+          <a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy Now</a>
+        </div>
+        <div class="plan">
+          <h3>How to Know Your Purpose</h3>
+          <p>Free / Paid Download</p>
+          <a href="https://payhip.com/b/N7Lvg" class="payhip-buy-button" data-theme="green" data-product="N7Lvg">Buy Now</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- Bridge note at bottom of NOVA pages -->
+  <footer class="bridge-note no-print">
+    You’re currently in <b>NOVA</b> (free results). To apply your results with advanced tools like resume rewrites and job filters, continue in <b>NAVI</b> (paid membership).
+  </footer>
+
+  <script>
+    // Simple example mapping; extend to all 50 traits
+    const traitToCluster = {
+      Visionary: 'Design & Innovation',
+      Analytical: 'Data & Strategy',
+      Strategic: 'Data & Strategy',
+      Communicator: 'People & Operations',
+      Leadership: 'People & Operations',
+      Creative: 'Design & Innovation'
+    };
+
+    const clusterBlurbs = {
+      'Data & Strategy': 'You shine when solving complex problems and guiding decisions with evidence.',
+      'Design & Innovation': 'You excel in ideation, user experience, and creating fresh, valuable solutions.',
+      'People & Operations': 'You mobilize teams, set direction, and deliver consistent outcomes.'
+    };
+
+    const recs = {
+      'Data & Strategy': ['Business Intelligence Lead','Process Engineer','Lean Six Sigma Analyst'],
+      'Design & Innovation': ['Product Designer','Innovation Manager','Brand Strategist'],
+      'People & Operations': ['Operations Manager','People Lead','Program Director']
+    };
+
+    const form = document.getElementById('traits-form');
+    const traitsScreen = document.getElementById('traits-screen');
+    const resultsScreen = document.getElementById('results-screen');
+
+    const headlineEl = document.getElementById('result-headline');
+    const summaryEl = document.getElementById('result-summary');
+    const topTraitsEl = document.getElementById('top-traits');
+    const clustersEl = document.getElementById('clusters');
+    const recommendationsEl = document.getElementById('recommendations');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const selected = Array.from(form.querySelectorAll('input[name="trait"]:checked')).map(i => i.value);
+      if (selected.length === 0) { alert('Choose at least one trait to generate your report.'); return; }
+
+      // Build scores
+      const clusterScores = {};
+      selected.forEach(tr => {
+        const c = traitToCluster[tr] || 'General';
+        clusterScores[c] = (clusterScores[c] || 0) + 1;
+      });
+
+      // Render
+      traitsScreen.hidden = true;
+      resultsScreen.hidden = false;
+
+      headlineEl.textContent = 'Here’s what your traits reveal:';
+      summaryEl.textContent = `You selected ${selected.length} core traits.`;
+
+      topTraitsEl.innerHTML = '<h4>Your Top Traits:</h4>' + selected.map(tr => `<span class="pill">${tr}</span>`).join('');
+
+      const ranked = Object.entries(clusterScores).sort((a,b) => b[1]-a[1]);
+      clustersEl.innerHTML = '<h4>Your Strength Clusters:</h4>' +
+        ranked.map(([c,score]) => `<p><b>${c}</b> (${score}) – ${clusterBlurbs[c] || ''}</p>`).join('');
+
+      const seen = new Set();
+      recommendationsEl.innerHTML = '<h4>Suggested Roles:</h4>' +
+        ranked.map(([c]) => {
+          const list = (recs[c] || []).filter(r => !seen.has(r) && seen.add(r));
+          return list.length ? `<ul>${list.map(r => `<li>${r}</li>`).join('')}</ul>` : '';
+        }).join('');
+    });
+
+    document.getElementById('back-btn')?.addEventListener('click', () => {
+      resultsScreen.hidden = true;
+      traitsScreen.hidden = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+  </script>
+</body>
+</html>
