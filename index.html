@@ -13,7 +13,15 @@
     .trait { padding:16px; border:1px solid rgba(255,255,255,.2); border-radius:12px; text-align:center; cursor:pointer; transition:.2s; }
     .trait.selected { background:rgba(255,209,102,0.25); border-color:var(--accent); }
     .bottom-action { text-align:center; margin:20px; }
-  </style>
+  
+.traits-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:12px; margin-top:12px; }
+.trait-card { display:block; cursor:pointer; }
+.trait-card input { display:none; }
+.card-face { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px; transition:all .15s ease; }
+.card-face.selected { outline:2px solid #ffd166; background:rgba(255,209,102,0.08); }
+.trait-title { font-weight:700; margin-bottom:6px; color:#fff; }
+.trait-desc { color:#cbe0ff; font-size:14px; }
+</style>
 </head>
 <body>
   <div style="background:#0f1e44; color:#eaf1ff; padding:8px 12px; display:flex; gap:10px; align-items:center;">
@@ -79,6 +87,111 @@
     try { localStorage.clear(); } catch(e) {}
     window.location.href = 'welcome.html';
   });
+
+  // Force fresh state if coming from Welcome with ?fresh=1
+  (function(){
+    try {
+      const usp = new URLSearchParams(window.location.search);
+      if (usp.has('fresh')) {
+        localStorage.removeItem('novaSelectedTraits');
+      }
+    } catch(e) {}
+    // Uncheck any previously persisted checkboxes (some browsers restore state)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.trait-check').forEach(cb => { cb.checked = false; });
+      // Optional: surface trait count for sanity
+      const count = document.querySelectorAll('.trait-check').length;
+      const header = document.querySelector('#traits-screen h2');
+      if (header && !document.getElementById('traitCountNote')) {
+        const span = document.createElement('span');
+        span.id = 'traitCountNote';
+        span.style.cssText = 'font-weight:600; font-size:12px; margin-left:8px; color:#9ecfff;';
+        span.textContent = '(' + count + ' traits)';
+        header.appendChild(span);
+      }
+    });
+  })();
+
+
+  // Hardcoded 50 NOVA traits (title + description)
+  const TRAITS = [
+  {title: 'Visionary', desc: 'Sees future possibilities and patterns quickly.'},
+  {title: 'Analytical', desc: 'Breaks problems down and validates with data.'},
+  {title: 'Strategic', desc: 'Finds leverage points that move the whole system.'},
+  {title: 'Communicator', desc: 'Explains complex ideas clearly and persuasively.'},
+  {title: 'Leadership', desc: 'Mobilizes people and delivers outcomes.'},
+  {title: 'Creative', desc: 'Generates fresh, useful solutions.'},
+  {title: 'Detail‑oriented', desc: 'Notices small facts that improve quality.'},
+  {title: 'Adaptable', desc: 'Shifts approaches quickly as conditions change.'},
+  {title: 'Resilient', desc: 'Bounces back and perseveres through setbacks.'},
+  {title: 'Empathetic', desc: 'Reads others’ emotions and responds with care.'},
+  {title: 'Organized', desc: 'Plans, prioritizes, and tracks work effectively.'},
+  {title: 'Process‑oriented', desc: 'Builds repeatable systems that improve results.'},
+  {title: 'Quality‑minded', desc: 'Insists on high standards and polish.'},
+  {title: 'Data‑driven', desc: 'Uses metrics to guide decisions.'},
+  {title: 'Curious', desc: 'Asks great questions and explores widely.'},
+  {title: 'Quick learner', desc: 'Picks up new tools and domains fast.'},
+  {title: 'Systems thinker', desc: 'Understands how pieces interact in a whole.'},
+  {title: 'Results‑oriented', desc: 'Focuses on outcomes and impact.'},
+  {title: 'Collaborative', desc: 'Builds trust and works well across teams.'},
+  {title: 'Independent', desc: 'Manages self and moves work forward solo.'},
+  {title: 'Initiator', desc: 'Spots opportunities and takes the first step.'},
+  {title: 'Customer‑focused', desc: 'Centers users’ needs in decisions.'},
+  {title: 'User‑centered', desc: 'Designs with empathy and usability in mind.'},
+  {title: 'Problem solver', desc: 'Cuts through ambiguity to solutions.'},
+  {title: 'Planner', desc: 'Maps steps, risks, and resources.'},
+  {title: 'Presenter', desc: 'Communicates to groups with confidence.'},
+  {title: 'Writer', desc: 'Creates clear, compelling written content.'},
+  {title: 'Researcher', desc: 'Finds insights through structured inquiry.'},
+  {title: 'Innovative', desc: 'Pushes beyond the obvious to new value.'},
+  {title: 'Networker', desc: 'Builds relationships and opens doors.'},
+  {title: 'Mentor', desc: 'Develops others with feedback and support.'},
+  {title: 'Coach', desc: 'Guides people to their own best answers.'},
+  {title: 'Facilitator', desc: 'Leads groups to shared decisions.'},
+  {title: 'Negotiator', desc: 'Finds win‑wins and closes agreements.'},
+  {title: 'Ethical', desc: 'Acts with integrity and responsibility.'},
+  {title: 'Decisive', desc: 'Chooses a path and commits.'},
+  {title: 'Calm under pressure', desc: 'Stays steady when stakes are high.'},
+  {title: 'Comfortable with risk', desc: 'Takes smart risks to move forward.'},
+  {title: 'Resourceful', desc: 'Finds a way with limited resources.'},
+  {title: 'Organizer of chaos', desc: 'Brings clarity to messy situations.'},
+  {title: 'Tech‑savvy', desc: 'Learns and applies technology quickly.'},
+  {title: 'Process improver', desc: 'Continuously refines how work is done.'},
+  {title: 'Visual thinker', desc: 'Communicates ideas with visuals.'},
+  {title: 'Storyteller', desc: 'Connects ideas in narrative form.'},
+  {title: 'Numerate', desc: 'Thinks in models, metrics, and ROI.'},
+  {title: 'Connector', desc: 'Links people and opportunities at the right moment.'},
+  {title: 'Executor', desc: 'Gets things done with quality.'},
+  {title: 'Steadfast', desc: 'Dependable; calm under changing demands.'},
+  {title: 'Strategic vision', desc: 'Sets direction that others can follow.'},
+  {title: 'Client relations', desc: 'Builds strong, lasting client partnerships.'}
+];
+
+  // Render traits grid from TRAITS
+  function renderTraits() {
+    const grid = document.getElementById('traits-grid') || document.querySelector('.traits-grid');
+    if (!grid) return;
+    grid.innerHTML = TRAITS.map((t, idx) => `
+      <label class="trait-card">
+        <input type="checkbox" name="trait" value="${t.title}" />
+        <div class="card-face">
+          <div class="trait-title">${t.title}</div>
+          <div class="trait-desc">${t.desc}</div>
+        </div>
+      </label>
+    `).join('');
+    // selection highlighting
+    grid.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const face = cb.parentElement.querySelector('.card-face');
+      function sync() {
+        if (cb.checked) face.classList.add('selected'); else face.classList.remove('selected');
+      }
+      cb.addEventListener('change', sync); sync();
+    });
+  }
+
+  // Call on load
+  document.addEventListener('DOMContentLoaded', renderTraits);
 </script>
 </body>
 </html>

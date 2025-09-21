@@ -55,8 +55,9 @@
 
   <script>
     document.getElementById('beginBtn').addEventListener('click', () => {
-      try { localStorage.clear(); } catch(e) {}
-      window.location.href = 'index.html';
+      try { localStorage.removeItem('novaSelectedTraits'); sessionStorage.clear(); } catch(e) {}
+      const ts = Date.now();
+      window.location.href = 'index.html?fresh=1&_ts=' + ts;
     });
   </script>
 </body>
