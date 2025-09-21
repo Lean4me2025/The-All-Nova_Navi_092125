@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to NOVA</title>
+  <style>
+    :root { --bg:#0b1636; --ink:#eaf1ff; --edge:rgba(255,255,255,0.12); --accent:#ffd166; }
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:var(--bg); color:var(--ink); }
+    header { padding:16px; background:#0f1e44; border-bottom:1px solid var(--edge); }
+    .wrap { max-width:960px; margin:32px auto; padding:0 16px; }
+    .card { background:rgba(255,255,255,0.05); border:1px solid var(--edge); border-radius:16px; padding:24px; }
+    h1 { margin:0 0 8px 0; }
+    p.lead { color:#cbe0ff; margin:0 0 16px 0; }
+    .steps { display:flex; gap:14px; flex-wrap:wrap; }
+    .step { flex:1; min-width:220px; background:rgba(255,255,255,0.06); border:1px solid var(--edge); border-radius:12px; padding:12px; }
+    .controls { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:16px; }
+    .btn { display:inline-block; padding:12px 16px; border-radius:10px; border:1px solid #e5e7eb; background:var(--accent); color:#1a1500; font-weight:700; cursor:pointer; text-decoration:none; }
+    .ghost { background:transparent; color:#eaf1ff; border-color:#9fb6ff; }
+    .audio-box { background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.25); border-radius:12px; padding:14px; margin-top:16px; }
+    .audio-box p { margin:0 0 6px 0; color:#cbe0ff; }
+    footer { color:#b9c9ff; text-align:center; padding:12px; margin-top:20px; }
+  </style>
+</head>
+<body>
+  <header><strong>NOVA</strong> • Discover your core traits</header>
+  <main class="wrap">
+    <div class="card">
+      <h1>Welcome to NOVA</h1>
+      <p class="lead">First discover your core traits. Then reflect on where you are. Finally, step into NAVI to apply your purpose.</p>
+
+      <div class="steps">
+        <div class="step"><b>1) Select traits</b><br/>Tap the cards that sound like you.</div>
+        <div class="step"><b>2) See results</b><br/>Get your trait‑based results and roles.</div>
+        <div class="step"><b>3) Reflect & continue</b><br/>Choose your pathway and plan in NAVI.</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="beginBtn">Begin Your Journey with Nova</button>
+        <a class="ghost btn" href="navi.html">Learn about NAVI</a>
+      </div>
+
+      <!-- Audio Placeholder -->
+      <div class="audio-box">
+        <p><b>Optional audio welcome (placeholder):</b> When you have the audio file, replace the <code>src</code> below.</p>
+        <audio controls style="width:100%;">
+          <!-- Replace 'welcome.mp3' with your file path when ready -->
+          <source src="welcome.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </main>
+  <footer>Every step you’ve taken brought you here. Let’s begin.</footer>
+
+  <script>
+    document.getElementById('beginBtn').addEventListener('click', () => {
+      try { localStorage.clear(); } catch(e) {}
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
