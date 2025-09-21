@@ -2,6 +2,251 @@
   {
     "id": "visionary",
     "name": "Visionary",
-    "blurb": "Sees patterns and future possibilities."
+    "blurb": "Sees future possibilities and patterns quickly."
+  },
+  {
+    "id": "analytical",
+    "name": "Analytical",
+    "blurb": "Breaks problems down and validates with data."
+  },
+  {
+    "id": "empathic",
+    "name": "Empathic",
+    "blurb": "Understands people; builds trust fast."
+  },
+  {
+    "id": "builder",
+    "name": "Builder",
+    "blurb": "Turns ideas into working systems."
+  },
+  {
+    "id": "strategic",
+    "name": "Strategic",
+    "blurb": "Finds leverage points that move the whole system."
+  },
+  {
+    "id": "communicator",
+    "name": "Communicator",
+    "blurb": "Explains complex ideas simply and persuasively."
+  },
+  {
+    "id": "learner",
+    "name": "Learner",
+    "blurb": "Curious; always improving knowledge."
+  },
+  {
+    "id": "teacher",
+    "name": "Teacher",
+    "blurb": "Guides others from confusion to clarity."
+  },
+  {
+    "id": "connector",
+    "name": "Connector",
+    "blurb": "Links people and opportunities at the right moment."
+  },
+  {
+    "id": "steadfast",
+    "name": "Steadfast",
+    "blurb": "Dependable; calm under pressure."
+  },
+  {
+    "id": "innovator",
+    "name": "Innovator",
+    "blurb": "Experiments and prototypes; iterates quickly."
+  },
+  {
+    "id": "organizer",
+    "name": "Organizer",
+    "blurb": "Creates order, flow, and clean handoffs."
+  },
+  {
+    "id": "executor",
+    "name": "Executor",
+    "blurb": "Gets things done with quality."
+  },
+  {
+    "id": "numerate",
+    "name": "Numerate",
+    "blurb": "Thinks in models, metrics, and ROI."
+  },
+  {
+    "id": "creative",
+    "name": "Creative",
+    "blurb": "Generates novel combinations and fresh angles."
+  },
+  {
+    "id": "servant",
+    "name": "Servant-Leader",
+    "blurb": "Influences by serving and lifting others."
+  },
+  {
+    "id": "resilient",
+    "name": "Resilient",
+    "blurb": "Bounces back stronger from adversity."
+  },
+  {
+    "id": "disciplined",
+    "name": "Disciplined",
+    "blurb": "Builds compounding habits; shows up daily."
+  },
+  {
+    "id": "adaptable",
+    "name": "Adaptable",
+    "blurb": "Shifts gracefully as situations change."
+  },
+  {
+    "id": "detail",
+    "name": "Detail-Attentive",
+    "blurb": "Catches small issues that protect big outcomes."
+  },
+  {
+    "id": "systems",
+    "name": "Systems Thinker",
+    "blurb": "Understands interactions and second-order effects."
+  },
+  {
+    "id": "mission",
+    "name": "Mission-Driven",
+    "blurb": "Purpose fuels persistence and focus."
+  },
+  {
+    "id": "relational",
+    "name": "Relational",
+    "blurb": "Invests in people; nurtures networks."
+  },
+  {
+    "id": "calibrated",
+    "name": "Calibrated Risk Taker",
+    "blurb": "Acts boldly with safeguards and contingencies."
+  },
+  {
+    "id": "ethical",
+    "name": "Ethical",
+    "blurb": "Chooses right over easy; builds trust."
+  },
+  {
+    "id": "customer",
+    "name": "Customer-Obsessed",
+    "blurb": "Hears customer needs in every decision."
+  },
+  {
+    "id": "selfstarter",
+    "name": "Self-Starter",
+    "blurb": "Initiates without being asked."
+  },
+  {
+    "id": "diligent",
+    "name": "Diligent",
+    "blurb": "Closes loops; follows through completely."
+  },
+  {
+    "id": "storyteller",
+    "name": "Storyteller",
+    "blurb": "Shapes narrative that mobilizes action."
+  },
+  {
+    "id": "collaborative",
+    "name": "Collaborative",
+    "blurb": "Amplifies outcomes through teamwork."
+  },
+  {
+    "id": "mentor",
+    "name": "Mentor",
+    "blurb": "Multiplies impact by growing others."
+  },
+  {
+    "id": "humble",
+    "name": "Humble",
+    "blurb": "Learns and credits others readily."
+  },
+  {
+    "id": "decisive",
+    "name": "Decisive",
+    "blurb": "Commits with clarity when it matters."
+  },
+  {
+    "id": "organized",
+    "name": "Well-Organized",
+    "blurb": "Plans, prioritizes, and keeps the machine humming."
+  },
+  {
+    "id": "optimistic",
+    "name": "Optimistic-Realist",
+    "blurb": "Hopeful yet grounded in data."
+  },
+  {
+    "id": "listener",
+    "name": "Active Listener",
+    "blurb": "Hears intent beneath words."
+  },
+  {
+    "id": "craft",
+    "name": "Craftsperson",
+    "blurb": "Takes pride in high-finish deliverables."
+  },
+  {
+    "id": "curator",
+    "name": "Curator",
+    "blurb": "Selects great inputs so outputs shine."
+  },
+  {
+    "id": "orchestrator",
+    "name": "Orchestrator",
+    "blurb": "Coordinates moving parts to a shared goal."
+  },
+  {
+    "id": "protector",
+    "name": "Protector",
+    "blurb": "Guards security, privacy, and dignity."
+  },
+  {
+    "id": "healer",
+    "name": "Encourager",
+    "blurb": "Restores morale; speaks life into teams."
+  },
+  {
+    "id": "time",
+    "name": "Time-Wise",
+    "blurb": "Optimizes for focus and opportunity cost."
+  },
+  {
+    "id": "financial",
+    "name": "Financially Savvy",
+    "blurb": "Understands cash flow, margins, and risk."
+  },
+  {
+    "id": "quality",
+    "name": "Quality-Focused",
+    "blurb": "Prevents defects; builds right the first time."
+  },
+  {
+    "id": "sales",
+    "name": "Value Seller",
+    "blurb": "Matches needs to solutions without pressure."
+  },
+  {
+    "id": "ops",
+    "name": "Ops-Minded",
+    "blurb": "Optimizes throughput; removes bottlenecks."
+  },
+  {
+    "id": "data",
+    "name": "Data Fluent",
+    "blurb": "Collects and interprets data to decide."
+  },
+  {
+    "id": "security",
+    "name": "Security-Aware",
+    "blurb": "Designs with threats and safeguards in mind."
+  },
+  {
+    "id": "teachable",
+    "name": "Teachable",
+    "blurb": "Receives feedback and improves quickly."
+  },
+  {
+    "id": "grit",
+    "name": "Gritty",
+    "blurb": "Stays in the ring longer than most."
   }
 ]

@@ -1,8 +1,27 @@
-<!doctype html><html><head>
-<meta charset="utf-8"><title>Nova</title>
-<link rel="stylesheet" href="assets/css/styles.css">
-<script src="assets/js/nova.js" defer></script>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nova — Trait Discovery</title>
+<link rel="stylesheet" href="assets/css/styles.css"/>
+<script defer src="assets/js/nova.js"></script>
 </head><body>
-<h1>Nova: Trait Discovery</h1>
-<div id="traits"></div>
+<header class="container">
+  <img src="assets/img/logo.svg" alt="logo"/>
+  <div><div style="font-weight:800;font-size:20px">NOVA</div>
+  <div class="kicker">Discover your core traits</div></div>
+</header>
+<main class="container">
+  <div class="card">
+    <h2>Pick the traits that feel most like you</h2>
+    <p class="no-print">Tip: Choose 8–12 to start. You can always come back and refine.</p>
+    <div id="traits" class="traits"></div>
+    <div style="margin-top:18px" class="no-print">
+      <button class="btn" id="saveTraits">Generate My Report</button>
+      <a class="btn secondary" href="navi.html">Send to Navi</a>
+    </div>
+  </div>
+
+  <section id="report" class="print-only report"></section>
+</main>
+<footer>© Nova</footer>
 </body></html>

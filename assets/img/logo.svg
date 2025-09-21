@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80">
-  <rect width="300" height="80" rx="10" ry="10" fill="#0a1133"/>
-  <text x="20" y="50" font-size="28" fill="#ffd76a" font-family="Arial">NOVA ✦ NAVI</text>
+  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0a1133"/><stop offset="1" stop-color="#182a71"/></linearGradient></defs>
+  <rect width="300" height="80" rx="10" ry="10" fill="url(#g)"/>
+  <text x="18" y="50" font-size="28" fill="#ffd76a" font-family="Arial, Helvetica, sans-serif">NOVA ✦ NAVI</text>
 </svg>

@@ -1,6 +1,67 @@
 {
   "visionary": [
     "Entrepreneurship",
-    "Product Strategy"
+    "Product Strategy",
+    "Innovation Lead"
+  ],
+  "analytical": [
+    "Data Analyst",
+    "BI Lead",
+    "Financial Analyst"
+  ],
+  "empathic": [
+    "Client Success",
+    "Coach/Counselor",
+    "HR Business Partner"
+  ],
+  "builder": [
+    "Operations Manager",
+    "Process Engineer",
+    "Program Manager"
+  ],
+  "security": [
+    "Cybersecurity Analyst",
+    "GRC Specialist",
+    "Security Architect"
+  ],
+  "communicator": [
+    "Marketing Strategist",
+    "Sales Enablement",
+    "Content Lead"
+  ],
+  "teacher": [
+    "L&D Specialist",
+    "Curriculum Designer",
+    "Workshop Facilitator"
+  ],
+  "ops": [
+    "Ops Manager",
+    "Supply Chain",
+    "Lean Six Sigma Consultant"
+  ],
+  "numerate": [
+    "FP&A",
+    "Actuarial Assistant",
+    "Quant Research"
+  ],
+  "craft": [
+    "UX Designer",
+    "Brand Designer",
+    "Creative Producer"
+  ],
+  "data": [
+    "Data Engineer",
+    "Analytics Engineer",
+    "Data Scientist"
+  ],
+  "quality": [
+    "QA Lead",
+    "Reliability Engineer",
+    "Process Auditor"
+  ],
+  "sales": [
+    "Account Executive",
+    "Solutions Consultant",
+    "Partnerships Manager"
   ]
 }

@@ -1,13 +1,45 @@
 <!doctype html>
-<html><head>
-<meta charset="utf-8"><title>Nova + Navi</title>
-<link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-<header><img src="assets/img/logo.svg" style="height:40px"/> Welcome to Nova + Navi</header>
-<main>
-<h1>Landing</h1>
-<a href="nova.html">Go to Nova</a> | <a href="navi.html">Go to Navi</a>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nova + Navi</title>
+<link rel="stylesheet" href="assets/css/styles.css"/>
+<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+</head><body>
+<header class="container">
+  <img src="assets/img/logo.svg" alt="logo"/>
+  <div><div style="font-weight:800;font-size:20px">NOVA + NAVI</div>
+  <div class="kicker">Purpose → Path</div></div>
+</header>
+<main class="container">
+  <div class="card">
+    <h2>Welcome</h2>
+    <p>Meet <strong>Nova</strong> (discover your core traits) and <strong>Navi</strong> (turn them into clear next steps).</p>
+    <div class="grid cols-2">
+      <a class="btn" href="nova.html">Start with Nova</a>
+      <a class="btn secondary" href="navi.html">Go to Navi</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Memberships</h3>
+    <div class="grid cols-3">
+      <div>
+        <h4>Starter</h4>
+        <p>50-trait discovery, basic resume, 1 cover letter, monthly golden nugget.</p>
+        <a href="https://payhip.com/b/GdfU7" class="payhip-buy-button" data-theme="green" data-product="GdfU7">Buy Now</a>
+      </div>
+      <div>
+        <h4>Pro Suite</h4>
+        <p>Everything in Starter + resume rewrite AI, unlimited cover letters, company intel reports, advanced job filters, priority support.</p>
+        <a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy Now</a>
+      </div>
+      <div>
+        <h4>Mastery</h4>
+        <p>Everything in Pro + 1:1 coaching, career roadmap PDF, extended library, quarterly masterclass.</p>
+        <a href="#" class="btn secondary" onclick="alert('Add your Mastery product link in index.html');return false;">Contact for Mastery</a>
+      </div>
+    </div>
+  </div>
 </main>
 <footer>© 2025 Nova + Navi</footer>
 </body></html>
