@@ -17,7 +17,7 @@
 .traits-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:12px; margin-top:12px; }
 .trait-card { display:block; cursor:pointer; }
 .trait-card input { display:none; }
-.card-face { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px; transition:all .15s ease; }
+.card-face { min-height: 92px;  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px; transition:all .15s ease; }
 .card-face.selected { outline:2px solid #ffd166; background:rgba(255,209,102,0.08); }
 .trait-title { font-weight:700; margin-bottom:6px; color:#fff; }
 .trait-desc { color:#cbe0ff; font-size:14px; }
@@ -27,7 +27,7 @@
 .traits-grid { display:grid !important; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important; gap:16px !important; margin-top:14px !important; }
 .trait-card { display:block; cursor:pointer; }
 .trait-card input { display:none; }
-.card-face { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px; transition:all .15s ease; }
+.card-face { min-height: 92px;  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px; transition:all .15s ease; }
 .card-face.selected { outline:2px solid #ffd166; background:rgba(255,209,102,0.08); }
 .trait-title { font-weight:700; margin-bottom:6px; color:#fff; }
 .trait-desc { color:#cbe0ff; font-size:14px; }
@@ -44,7 +44,7 @@
 
   <header>
     <div class="traits-header"><h2 class="traits-title">Select your traits</h2>
-<div id="traits-grid" class="traits-grid"></div>
+<div id="traits-grid" class="traits-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;"></div>
 <p id="select-nudge" style="margin:6px 0 0; color:#cbe0ff; font-size:14px;">Select at least one trait to continue.</p>
 <div id="cta-bottom-wrap"><button id="see-results-bottom" class="cta-bottom">See My Trait-Based Results</button></div><button type="button" id="see-results-top" class="cta-top">See My Trait-Based Results</button></div>
     <button class="btn-primary" onclick="showResults()">See My Trait-Based Results</button>
@@ -358,6 +358,16 @@ function renderTraitsGrid() {
 }
 
 document.addEventListener('DOMContentLoaded', renderTraitsGrid);
+
+
+  // Layout failsafe: enforce grid styling at runtime in case external CSS overrides
+  (function ensureGrid() {
+    const g = document.getElementById('traits-grid');
+    if (!g) return;
+    g.style.display = 'grid';
+    g.style.gridTemplateColumns = 'repeat(auto-fit, minmax(280px, 1fr))';
+    g.style.gap = '16px';
+  })();
 
 </script>
 </body>
