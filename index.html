@@ -1,1 +1,87 @@
-<!doctype html><meta charset='utf-8'><title>index.html</title><div style='padding:20px;font-family:Arial,Helvetica,sans-serif'>Placeholder for index.html</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova — Purpose Navigator</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Nova</h1>
+    <nav>
+      <a href="#intro" class="nav-link">Intro</a>
+      <a href="#traits" class="nav-link">Traits</a>
+      <a href="#summary" class="nav-link">Summary</a>
+      <a href="#cta" class="nav-link">Get Nova Pro</a>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- Intro Screen -->
+    <section id="intro" class="screen active">
+      <h2>Discover Your God-Given Purpose</h2>
+      <p>Answer a few Spirit-led prompts to surface the desires God planted in your heart.</p>
+      <button id="startBtn">Start</button>
+    </section>
+
+    <!-- Traits Screen -->
+    <section id="traits" class="screen">
+      <h2>Choose What Resonates</h2>
+      <p>Select up to 7 traits.</p>
+      <form id="traitsForm" class="grid">
+        <label><input type="checkbox" name="trait" value="Builder" /> Builder</label>
+        <label><input type="checkbox" name="trait" value="Teacher" /> Teacher</label>
+        <label><input type="checkbox" name="trait" value="Healer" /> Healer</label>
+        <label><input type="checkbox" name="trait" value="Artist" /> Artist</label>
+        <label><input type="checkbox" name="trait" value="Strategist" /> Strategist</label>
+        <label><input type="checkbox" name="trait" value="Innovator" /> Innovator</label>
+        <label><input type="checkbox" name="trait" value="Connector" /> Connector</label>
+        <label><input type="checkbox" name="trait" value="Servant-Leader" /> Servant-Leader</label>
+        <label><input type="checkbox" name="trait" value="Evangelist" /> Evangelist</label>
+        <label><input type="checkbox" name="trait" value="Pastoral" /> Pastoral</label>
+      </form>
+      <div class="actions">
+        <button class="ghost" data-target="intro">Back</button>
+        <button id="toSummary">Continue</button>
+      </div>
+    </section>
+
+    <!-- Summary Screen -->
+    <section id="summary" class="screen">
+      <h2>Your Purpose Snapshot</h2>
+      <div id="summaryCard" class="card"></div>
+      <form id="emailForm" class="stack">
+        <label>Email for your snapshot PDF (optional)</label>
+        <input type="email" id="email" placeholder="you@example.com" />
+        <button id="saveProfile">Save My Snapshot</button>
+      </form>
+      <div class="actions">
+        <button class="ghost" data-target="traits">Back</button>
+        <a class="button" href="#cta">Next</a>
+      </div>
+    </section>
+
+    <!-- CTA Screen -->
+    <section id="cta" class="screen">
+      <h2>Go Deeper with Nova Pro</h2>
+      <ul>
+        <li>Guided purpose journal</li>
+        <li>Weekly alignment check-ins</li>
+        <li>Printable declarations</li>
+      </ul>
+      <!-- Replace this link with your real Payhip product URL -->
+      <a class="button" href="https://payhip.com/" target="_blank" rel="noopener">Get Nova Pro</a>
+      <div class="actions">
+        <button class="ghost" data-target="summary">Back</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© 2025 Nova. All rights reserved.</small>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

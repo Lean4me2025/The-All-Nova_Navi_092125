@@ -1,8 +1,21 @@
-# Nova + Navi — Integrated Brains (092125)
+# Nova — Purpose Navigator
 
-This build includes:
-- Nova: 50 trait cards loaded from JSON, selection saved to localStorage, and a **print-to-PDF** Purpose Report (use your browser’s “Save as PDF”).
-- Navi: Reads selected traits and maps them to roles via `data/decision_tree.json`, displaying suggestions with call-to-action buttons.
-- Payhip embeds on index & Navi pages.
+A lightweight MVP single-page app for discovering purpose traits and generating a snapshot.
 
-Deploy as a static site (Vercel/Netlify/GitHub Pages).
+## Features
+- Hash-based routing (no server required) — fixes "index.html showing one screen" issues on deploy.
+- Trait selection (up to 7), summary card, optional email capture (stored locally for MVP).
+- CTA to Payhip (replace placeholder link).
+- Clean CSS and accessible HTML.
+
+## Quick Start
+1. Deploy to Vercel/Netlify/GitHub Pages by dragging the folder.
+2. Ensure **SPA/fallback** is enabled so routes like `#summary` work client-side.
+3. Replace the Payhip link in `index.html` CTA.
+
+## Suggested Enhancements
+- Hook email capture to your provider (Resend/Mailgun).
+- Add PDF generation (e.g., jsPDF) client-side.
+- Persist profiles to a server or Airtable.
+
+_Compiled on 2025-09-22._
